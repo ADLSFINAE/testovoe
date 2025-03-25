@@ -20,6 +20,8 @@ public:
 
     void changeColor(QBrush brush);
 
+    QPointF getPos() const{return QPointF(x,y);};
+
 private:
     int x, y;
     QBrush color;

@@ -12,11 +12,13 @@
 
 #include "paramsNdefines.h"
 
-class GeneralAdapter
+class GeneralAdapter : public QObject
 {
+    Q_OBJECT
 public:
     GeneralAdapter();
-
+public slots:
+    void cleanVecBlocks(QVector<CustomBlock*> vecBlocks);
 private:
     CustomScene* scene{nullptr};
     CustomView* view{nullptr};

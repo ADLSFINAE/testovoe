@@ -18,4 +18,18 @@ GeneralAdapter::GeneralAdapter()
     scene->addWidget(answerTextEdit);
     answerTextEdit->setGeometry(401, 110, 400, 700);
     answerTextEdit->show();
+
+    QObject::connect(generalWidget->getInputWidget(),
+                     SIGNAL(numberSubmitted(int)), boardSolver, SLOT(initVecBlocks(int)));
+
+
+}
+
+void GeneralAdapter::cleanVecBlocks(QVector<CustomBlock *> vecBlocks)
+{
+    qDebug()<<vecBlocks.size();
+    QVector<CustomBlock*> vec = vecBlocks;
+    for(auto& elem : vec){
+        elem->hide();
+    }
 }

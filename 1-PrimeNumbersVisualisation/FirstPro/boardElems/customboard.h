@@ -4,6 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 #include <QVector>
+#include <QDebug>
 
 #include "boardElems/customblock.h"
 #include "paramsNdefines.h"
@@ -15,6 +16,13 @@ public:
     CustomBoard() = default;
     CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem* parent = nullptr);
 
+    QVector<CustomBlock*> getVecBlocks() const{
+        return vecBlocks;
+    }
+signals:
+    void cleanBoard();
+    void sendVecOfBlocks(QVector<CustomBlock*> vecBlocks);
+public slots:
     void initVecBlocks(int N);
 
 private:

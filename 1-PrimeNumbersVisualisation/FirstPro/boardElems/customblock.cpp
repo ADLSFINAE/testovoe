@@ -2,6 +2,9 @@
 
 CustomBlock::CustomBlock(int x, int y, int number, QGraphicsRectItem *parentItem)
 {
+    this->x = x;
+    this->y = y;
+    this->number = number;
     this->setParentItem(parentItem);
     this->setRect(GlobVal::blockRect);
     this->setPos(GlobVal::blockRect.width() * x, GlobVal::blockRect.height() * y);
