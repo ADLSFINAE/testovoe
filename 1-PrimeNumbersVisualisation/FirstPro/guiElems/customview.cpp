@@ -4,7 +4,8 @@ CustomView::CustomView(QRectF viewRect, QGraphicsScene* scene, QGraphicsView* vi
     :QGraphicsView(view)
 {
     this->setScene(scene);
-    this->setFixedSize(viewRect.width(), viewRect.height());
+    //this->setFixedSize(viewRect.width(), viewRect.height());
+    this->resize(810, 810);
 }
 
 void CustomView::mousePressEvent(QMouseEvent *event)

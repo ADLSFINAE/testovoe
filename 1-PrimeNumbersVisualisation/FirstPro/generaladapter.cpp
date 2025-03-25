@@ -23,10 +23,12 @@ GeneralAdapter::GeneralAdapter()
     QObject::connect(generalWidget->getInputWidget(), &InputWidget::numberSubmitted,
                      boardSolver, &CustomBoard::initVecBlocks);
 
+    //коннект для передачи текста
     QObject::connect(boardSolver, &CustomBoard::signalToSendPrimeNumber,
                      answerTextEdit, &AnswerTextEdit::appendOutput);
 
-
+    QObject::connect(generalWidget->getControllerWidget()->getBtnInstaResult(), &QPushButton::clicked,
+                     boardSolver, &CustomBoard::changePos);
 }
 
 void GeneralAdapter::cleanVecBlocks(QVector<CustomBlock *> vecBlocks)

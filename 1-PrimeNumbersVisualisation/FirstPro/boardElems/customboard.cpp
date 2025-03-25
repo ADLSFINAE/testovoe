@@ -102,3 +102,16 @@ void CustomBoard::initVecBlocks(int N)
 
 
 }
+
+void CustomBoard::changePos()
+{
+
+    // тут нужно будет написать логику
+    int calc = vecBlocks.size() / 10;
+
+    int minY = 0;
+    int maxY = calc * 40;
+    if(this->pos().y() < maxY){
+        this->setPos(0, this->pos().y() - 40);
+    }
+}

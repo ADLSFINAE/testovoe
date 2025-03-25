@@ -10,7 +10,7 @@ InputWidget::InputWidget(QWidget *parent)
     btnInputNumber = new QPushButton("Submit", this);
 
     // Настраиваем валидатор для ввода чисел от 0 до maxN
-    QIntValidator* validator = new QIntValidator(0, 201, this);
+    QIntValidator* validator = new QIntValidator(0, 1000, this);
     lineEdit->setValidator(validator);
 
     // Настраиваем layout
@@ -32,7 +32,7 @@ void InputWidget::processInput()
     bool ok;
     int value = lineEdit->text().toInt(&ok);
 
-    if (ok && value >= 0 && value <= 201) {
+    if (ok && value >= 1 && value <= 1000) {
         emit numberSubmitted(value);  // Отправляем сигнал
         lineEdit->clear();           // Очищаем поле
     } else {

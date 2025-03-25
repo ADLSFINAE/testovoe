@@ -12,10 +12,8 @@ public:
     ControllerWidget() = default;
     ControllerWidget(QWidget* parent);
 
-    QPushButton* getBtnStop() const{return btnStop;};
     QPushButton* getBtnInstaResult() const{return btnInstaResult;};
 private:
-    QPushButton* btnStop{nullptr};
     QPushButton* btnInstaResult{nullptr};
 
     QVBoxLayout* layout{nullptr};

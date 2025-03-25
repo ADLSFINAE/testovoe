@@ -5,14 +5,12 @@ ControllerWidget::ControllerWidget(QWidget *parent)
     this->setParent(parent);
 
     // Создаем кнопки
-    btnStop = new QPushButton("Stop", this);
     btnInstaResult = new QPushButton("Instant Result", this);
 
     // Создаем вертикальный layout
     layout = new QVBoxLayout(this);
 
     // Добавляем кнопки в layout
-    layout->addWidget(btnStop);
     layout->addWidget(btnInstaResult);
 
     // Опциональные настройки
@@ -21,3 +19,6 @@ ControllerWidget::ControllerWidget(QWidget *parent)
 
     this->show();
 }
+
+
+
