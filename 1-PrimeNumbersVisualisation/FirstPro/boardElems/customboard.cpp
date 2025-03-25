@@ -1,5 +1,8 @@
 #include "customboard.h"
 #include "guiElems/customscene.h"
+#include "logicElems/sieveeratosthenes.h"
+#include <QTimer>
+#include <QEventLoop>
 
 CustomBoard::CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem *parent)
     :QGraphicsRectItem(parent)
@@ -32,5 +35,51 @@ void CustomBoard::initVecBlocks(int N)
         }
         vecBlocks[i] = block;
     }
+    //исключительная ситуация
+    if(vecBlocks[0] != nullptr){
+        vecBlocks[0]->changeColor(Qt::blue);
+    }
+    if(vecBlocks[1] != nullptr){
+        vecBlocks[1]->changeColor(Qt::blue);
+    }
+
+
+    // Создаем массив для отметки простых чисел
+    QVector<bool> isPrime(N + 1, true);
+    isPrime[0] = isPrime[1] = false;
+
+    // Алгоритм Решета Эратосфена
+    for (int p = 2; p * p <= N; ++p) {
+        if (isPrime[p]) {
+            // Вычеркиваем все кратные p, начиная с p²
+            for (int i = p * p; i <= N; i += p) {
+                for(auto& elem : vecBlocks){
+                    if(elem->getNumber() == i){
+                        // Задержка 1 секунда с обработкой событий
+                        QTimer timer;
+                        QEventLoop loop;
+                        timer.setSingleShot(true);
+                        QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+                        timer.start(10); // 1000 мс = 1 секунда
+                        loop.exec(); // Ожидаем завершения таймера
+                        elem->changeColor(Qt::red);
+                    }
+
+                }
+                isPrime[i] = false;
+            }
+        }
+    }
+
+    // Собираем все простые числа в результат
+    QVector<int> primes;
+    for (int i = 2; i <= N; ++i) {
+        if (isPrime[i]) {
+            primes.push_back(i);
+        }
+    }
+
+
+
 
 }

@@ -21,6 +21,7 @@ public:
     void changeColor(QBrush brush);
 
     QPointF getPos() const{return QPointF(x,y);};
+    int getNumber() const{return number;};
 
 private:
     int x, y;

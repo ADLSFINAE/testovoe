@@ -17,10 +17,14 @@ GeneralAdapter::GeneralAdapter()
     answerTextEdit = new AnswerTextEdit(nullptr);
     scene->addWidget(answerTextEdit);
     answerTextEdit->setGeometry(401, 110, 400, 700);
+
     answerTextEdit->show();
 
-    QObject::connect(generalWidget->getInputWidget(),
-                     SIGNAL(numberSubmitted(int)), boardSolver, SLOT(initVecBlocks(int)));
+    //коннект для инициализации доски значениями и ее отчистки от старый значений
+    QObject::connect(generalWidget->getInputWidget(), &InputWidget::numberSubmitted,
+                     boardSolver, &CustomBoard::initVecBlocks);
+
+
 
 
 }

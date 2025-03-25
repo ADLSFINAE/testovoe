@@ -21,7 +21,6 @@ public:
     }
 signals:
     void cleanBoard();
-    void sendVecOfBlocks(QVector<CustomBlock*> vecBlocks);
 public slots:
     void initVecBlocks(int N);
 

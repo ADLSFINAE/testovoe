@@ -11,6 +11,10 @@ class ControllerWidget : public QWidget
 public:
     ControllerWidget() = default;
     ControllerWidget(QWidget* parent);
+
+    QPushButton* getBtnStart() const{return btnStart;};
+    QPushButton* getBtnStop() const{return btnStop;};
+    QPushButton* getBtnInstaResult() const{return btnInstaResult;};
 private:
     QPushButton* btnStart{nullptr};
     QPushButton* btnStop{nullptr};
