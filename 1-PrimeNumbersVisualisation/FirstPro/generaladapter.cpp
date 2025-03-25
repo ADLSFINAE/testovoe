@@ -17,14 +17,14 @@ GeneralAdapter::GeneralAdapter()
     answerTextEdit = new AnswerTextEdit(nullptr);
     scene->addWidget(answerTextEdit);
     answerTextEdit->setGeometry(401, 110, 400, 700);
-
     answerTextEdit->show();
 
     //коннект для инициализации доски значениями и ее отчистки от старый значений
     QObject::connect(generalWidget->getInputWidget(), &InputWidget::numberSubmitted,
                      boardSolver, &CustomBoard::initVecBlocks);
 
-
+    QObject::connect(boardSolver, &CustomBoard::signalToSendPrimeNumber,
+                     answerTextEdit, &AnswerTextEdit::appendOutput);
 
 
 }

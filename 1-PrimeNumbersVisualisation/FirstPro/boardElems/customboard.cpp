@@ -40,6 +40,7 @@ void CustomBoard::initVecBlocks(int N)
         vecBlocks[0]->changeColor(Qt::blue);
         vecBlocks[0]->setPrimeStatus(false);
     }
+    //исключительная ситуация
     if(vecBlocks[1] != nullptr){
         vecBlocks[1]->changeColor(Qt::blue);
         vecBlocks[1]->setPrimeStatus(false);
@@ -85,6 +86,7 @@ void CustomBoard::initVecBlocks(int N)
             loop.exec(); // Ожидаем завершения таймера
             QObject::disconnect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
             elem->changeColor(Qt::green);
+            emit signalToSendPrimeNumber(QString::number(elem->getNumber()));
         }
     }
 

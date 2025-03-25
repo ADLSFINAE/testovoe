@@ -21,6 +21,7 @@ public:
     }
 signals:
     void cleanBoard();
+    void signalToSendPrimeNumber(const QString& text);
 public slots:
     void initVecBlocks(int N);
 
