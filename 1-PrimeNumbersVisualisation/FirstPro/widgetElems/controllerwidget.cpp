@@ -5,7 +5,6 @@ ControllerWidget::ControllerWidget(QWidget *parent)
     this->setParent(parent);
 
     // Создаем кнопки
-    btnStart = new QPushButton("Start", this);
     btnStop = new QPushButton("Stop", this);
     btnInstaResult = new QPushButton("Instant Result", this);
 
@@ -13,7 +12,6 @@ ControllerWidget::ControllerWidget(QWidget *parent)
     layout = new QVBoxLayout(this);
 
     // Добавляем кнопки в layout
-    layout->addWidget(btnStart);
     layout->addWidget(btnStop);
     layout->addWidget(btnInstaResult);
 

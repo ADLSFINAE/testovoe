@@ -38,9 +38,11 @@ void CustomBoard::initVecBlocks(int N)
     //исключительная ситуация
     if(vecBlocks[0] != nullptr){
         vecBlocks[0]->changeColor(Qt::blue);
+        vecBlocks[0]->setPrimeStatus(false);
     }
     if(vecBlocks[1] != nullptr){
         vecBlocks[1]->changeColor(Qt::blue);
+        vecBlocks[1]->setPrimeStatus(false);
     }
 
 
@@ -62,12 +64,27 @@ void CustomBoard::initVecBlocks(int N)
                         QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
                         timer.start(10); // 1000 мс = 1 секунда
                         loop.exec(); // Ожидаем завершения таймера
+                        QObject::disconnect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
                         elem->changeColor(Qt::red);
+                        elem->setPrimeStatus(false);
                     }
 
                 }
                 isPrime[i] = false;
             }
+        }
+    }
+
+    for(auto& elem : vecBlocks){
+        if(elem->getPrimeStatus()){
+            QTimer timer;
+            QEventLoop loop;
+            timer.setSingleShot(true);
+            QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+            timer.start(40); // 1000 мс = 1 секунда
+            loop.exec(); // Ожидаем завершения таймера
+            QObject::disconnect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+            elem->changeColor(Qt::green);
         }
     }
 

@@ -23,10 +23,13 @@ public:
     QPointF getPos() const{return QPointF(x,y);};
     int getNumber() const{return number;};
 
+    void setPrimeStatus(bool status){this->numberIsPrime = status;};
+    bool getPrimeStatus(){return numberIsPrime;};
 private:
     int x, y;
     QBrush color;
     int number;
+    bool numberIsPrime = true;
     QGraphicsTextItem* textItem{nullptr};
 };
 
