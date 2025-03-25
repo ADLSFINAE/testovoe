@@ -1,0 +1,21 @@
+#include "generaladapter.h"
+
+GeneralAdapter::GeneralAdapter()
+{
+    scene = new CustomScene(GlobVal::sceneRect, nullptr);
+    view = new CustomView(GlobVal::viewRect, scene, nullptr);
+    view->show();
+
+    boardSolver = new CustomBoard(GlobVal::boardSolver, 200, nullptr);
+    scene->addItem(boardSolver);
+
+    generalWidget = new GeneralWidget(nullptr);
+    generalWidget->setGeometry(401, 0, 400, 100);
+    scene->addWidget(generalWidget);
+    generalWidget->show();
+
+    answerTextEdit = new AnswerTextEdit(nullptr);
+    scene->addWidget(answerTextEdit);
+    answerTextEdit->setGeometry(401, 110, 400, 700);
+    answerTextEdit->show();
+}
