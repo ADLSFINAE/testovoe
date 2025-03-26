@@ -19,9 +19,10 @@ public:
     PanelWidget(QWidget* parent);
 
     QPushButton* getBtnFile() const{return btnFile;};
+
     CustomButton* getBtnSetFattFormat() const{return btnSetFattFormat;};
-    CustomButton* getBtnSetCursive() const{return btnSetCursive;};
-    CustomButton* getBtnSetUnderLine() const{return btnSetUnderLine;};
+    CustomButton* getBtnSetCursiveFormat() const{return btnSetCursive;};
+
     QPushButton* getBtnOpenTable() const{return btnOpenTable;};
 
 public slots:
@@ -32,7 +33,6 @@ private:
 
     CustomButton* btnSetFattFormat{nullptr};
     CustomButton* btnSetCursive{nullptr};
-    CustomButton* btnSetUnderLine{nullptr};
 
     QPushButton* btnOpenTable{nullptr};
 

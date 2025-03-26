@@ -14,11 +14,20 @@ class GeneralAdapter : public QObject
     Q_OBJECT
 public:
     GeneralAdapter();
+
 signals:
     void signalToRedrawTableWidget(QMap<int, int> stats);
+
+    void signalSetBold(bool bold);
+    void signalSetCursive(bool cursive);
 public slots:
+
+    void slotToCallSetBold();
+    void slotToCallSetCursive();
+
     void slotCreateTableWidget();
     void slotForCallBackToStartAlgorithm();
+
 private:
     GeneralWidget* genWgt{nullptr};
     CustomTableWidget* tableWgt{nullptr};

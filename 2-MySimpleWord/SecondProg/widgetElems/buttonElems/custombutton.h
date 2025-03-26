@@ -11,6 +11,9 @@ class CustomButton : public QPushButton
 public:
     CustomButton() = default;
     CustomButton(QString text, QWidget* parent);
+
+    bool getIsActive() const{return _isActive;};
+
 signals:
     void signalToChangeColor();
 public slots:

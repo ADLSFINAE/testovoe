@@ -12,7 +12,8 @@ public:
 signals:
     void sendToAlgorithm(QString text);
 public slots:
-    void vivodddd(QMap<int, int> stats);
+    void slotSetBoldText(bool bold);
+    void slotSetCursiveText(bool cursive);
 };
 
 #endif // CUSTOMTEXTEDIT_H

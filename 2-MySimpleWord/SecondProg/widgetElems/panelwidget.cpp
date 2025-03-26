@@ -9,14 +9,12 @@ PanelWidget::PanelWidget(QWidget *parent)
 
     btnSetFattFormat = new CustomButton("Жирный", this);
     btnSetCursive = new CustomButton("Курсив", this);
-    btnSetUnderLine = new CustomButton("Подчёркивание", this);
 
     btnOpenTable = new QPushButton("TRIE ALGO", this);
 
     //коннекты для смены цвета - индикация состояния
     QObject::connect(btnSetFattFormat, &QPushButton::clicked, btnSetFattFormat, &CustomButton::changeIsActive);
     QObject::connect(btnSetCursive, &QPushButton::clicked, btnSetCursive, &CustomButton::changeIsActive);
-    QObject::connect(btnSetUnderLine, &QPushButton::clicked, btnSetUnderLine, &CustomButton::changeIsActive);
 
     layout = new QHBoxLayout(this);
 
@@ -26,7 +24,6 @@ PanelWidget::PanelWidget(QWidget *parent)
     layout->addWidget(btnFile);
     layout->addWidget(btnSetFattFormat);
     layout->addWidget(btnSetCursive);
-    layout->addWidget(btnSetUnderLine);
     layout->addWidget(btnOpenTable);
 
     // Выравнивание влево и вверх
