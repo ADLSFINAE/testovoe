@@ -28,6 +28,10 @@ public slots:
     void slotCreateTableWidget();
     void slotForCallBackToStartAlgorithm();
 
+    void slotSetTextFromLoadTxtFile(QString text);
+    void slotSetTextForSaveInTxtFile();
+    void slotCleanTextEditFromText();
+
 private:
     GeneralWidget* genWgt{nullptr};
     CustomTableWidget* tableWgt{nullptr};

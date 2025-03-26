@@ -24,6 +24,18 @@ GeneralAdapter::GeneralAdapter()
     QObject::connect(this, &GeneralAdapter::signalSetCursive,
                      genWgt->getInputWgt(), &CustomTextEdit::slotSetCursiveText);
 
+    //коннект для загрузки файла
+    QObject::connect(genWgt->getPanelWidget(), &PanelWidget::signalTextLoadToTextEdit,
+                     this, &GeneralAdapter::slotSetTextFromLoadTxtFile);
+
+    //коннект для сохранения файла
+    QObject::connect(genWgt->getPanelWidget(), &PanelWidget::signalToGetTextFromTextEdit,
+                     this, &GeneralAdapter::slotSetTextForSaveInTxtFile);
+
+    //коннект для очистки бляяяяяяяяя
+    QObject::connect(genWgt->getPanelWidget(), &PanelWidget::signalCleanTextEdit,
+                     this, &GeneralAdapter::slotCleanTextEditFromText);
+
     calcAlgo = new CalcAlgorithm();
 
     //customtextedit -> отправит сигнал textChanged() -> который вызовет здесь метод с пустыми параметрами
@@ -42,12 +54,10 @@ void GeneralAdapter::slotToCallSetCursive()
 
 void GeneralAdapter::slotCreateTableWidget()
 {
-
-        tableWgt = new CustomTableWidget;
-        QObject::connect(this, &GeneralAdapter::signalToRedrawTableWidget,
-                         tableWgt, &CustomTableWidget::slotToDoTable);
-        tableWgt->show();
-
+    tableWgt = new CustomTableWidget;
+    QObject::connect(this, &GeneralAdapter::signalToRedrawTableWidget,
+                     tableWgt, &CustomTableWidget::slotToDoTable);
+    tableWgt->show();
 }
 
 void GeneralAdapter::slotForCallBackToStartAlgorithm()
@@ -56,4 +66,19 @@ void GeneralAdapter::slotForCallBackToStartAlgorithm()
     emit signalToRedrawTableWidget(calcAlgo->countWordLengthsSimple(genWgt->getInputWgt()->toPlainText()));
     //дальше тут добавляем emit signalToRedrawTableWidget(QVector<QVector<int, int>>)
     //этот сигнал связываем с tablewidget - заполняем таблицу заново
+}
+
+void GeneralAdapter::slotSetTextFromLoadTxtFile(QString text)
+{
+    genWgt->getInputWgt()->append(text);
+}
+
+void GeneralAdapter::slotSetTextForSaveInTxtFile()
+{
+    genWgt->getPanelWidget()->setTextForSaving(QString(genWgt->getInputWgt()->toPlainText()));
+}
+
+void GeneralAdapter::slotCleanTextEditFromText()
+{
+    genWgt->getInputWgt()->clear();
 }

@@ -23,11 +23,17 @@ public:
     CustomButton* getBtnSetFattFormat() const{return btnSetFattFormat;};
     CustomButton* getBtnSetCursiveFormat() const{return btnSetCursive;};
 
-    QPushButton* getBtnOpenTable() const{return btnOpenTable;};
+    void setTextForSaving(QString text){this->m_currentText = text;};
 
+    QPushButton* getBtnOpenTable() const{return btnOpenTable;};
+signals:
+    void signalTextLoadToTextEdit(QString text);
+    void signalToGetTextFromTextEdit();
+    void signalCleanTextEdit();
 public slots:
     void slotOpenExplorerToLoad();
     void slotOpenExplorerToSave();
+    void slotCleanTextEdit();
 private:
     QPushButton* btnFile{nullptr};
 
@@ -43,6 +49,9 @@ private:
     QMenu *menu{nullptr};
 
     QHBoxLayout* layout{nullptr};
+
+private:
+    QString m_currentText;
 };
 
 #endif // PANELWIDGET_H
