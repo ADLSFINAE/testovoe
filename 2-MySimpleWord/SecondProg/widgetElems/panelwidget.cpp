@@ -25,7 +25,7 @@ PanelWidget::PanelWidget(QWidget *parent)
     layout->addWidget(btnSetCursive);
     layout->addWidget(btnSetUnderLine);
 
-    // Выравнивание влево
+    // Выравнивание влево и вверх
     layout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
     // Фиксируем минимальную высоту панели
@@ -36,7 +36,7 @@ PanelWidget::PanelWidget(QWidget *parent)
 
     menu = new QMenu(this);
 
-    actionLoad = QSharedPointer<QAction>(new QAction("Загрузить", menu));
+    actionLoad = QSharedPointer<QAction>(new QAction(QString("Загрузить"), menu));
     actionSave =  QSharedPointer<QAction>( new QAction(QString("Сохранить"), menu));
     actionClean =  QSharedPointer<QAction>(new QAction(QString("Очистить"), menu));
 
@@ -46,7 +46,6 @@ PanelWidget::PanelWidget(QWidget *parent)
 
     QObject::connect(actionLoad.data(), &QAction::triggered, this, &PanelWidget::slotOpenExplorerToLoad);
     QObject::connect(actionSave.data(), &QAction::triggered, this, &PanelWidget::slotOpenExplorerToSave);
-
 
     btnFile->setMenu(menu);
 }

@@ -12,6 +12,7 @@ SOURCES += \
     generaladapter.cpp \
     main.cpp \
     widgetElems/buttonElems/custombutton.cpp \
+    widgetElems/customtextedit.cpp \
     widgetElems/generalwidget.cpp \
     widgetElems/panelwidget.cpp
 
@@ -19,6 +20,7 @@ HEADERS += \
 	generaladapter.h \
 	paramsNglobFunctions.h \
 	widgetElems/buttonElems/custombutton.h \
+	widgetElems/customtextedit.h \
 	widgetElems/generalwidget.h \
 	widgetElems/panelwidget.h
 

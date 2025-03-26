@@ -4,7 +4,6 @@
 #include <QObject>
 
 #include "widgetElems/generalwidget.h"
-#include "widgetElems/panelwidget.h"
 
 class GeneralAdapter : public QObject
 {
@@ -14,7 +13,6 @@ public:
 
 private:
     GeneralWidget* genWgt{nullptr};
-    PanelWidget* panWgt{nullptr};
 };
 
 #endif // GENERALADAPTER_H
