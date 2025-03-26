@@ -17,7 +17,7 @@ public:
     GeneralWidget(QWidget* parent = nullptr);
 
     PanelWidget* getPanelWidget()const{return panWgt;};
-    CustomTextEdit* getInputWgt()const{return inputWgt;};
+    CustomTextEdit* getInputWidget()const{return inputWgt;};
 
 private:
     PanelWidget* panWgt{nullptr};

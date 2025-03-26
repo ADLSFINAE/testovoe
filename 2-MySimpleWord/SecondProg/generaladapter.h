@@ -9,6 +9,8 @@
 #include "widgetElems/generalwidget.h"
 #include "widgetElems/tableElems/customtablewidget.h"
 
+#include "paramsNglobFunctions.h"
+
 class GeneralAdapter : public QObject
 {
     Q_OBJECT

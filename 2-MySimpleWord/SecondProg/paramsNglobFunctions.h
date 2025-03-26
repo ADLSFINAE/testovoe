@@ -16,6 +16,9 @@ inline QString hexColorToSimpleColor(Qt::GlobalColor color)
     }
 }
 
+#define PANEL_WIDGET(widget) (widget->getPanelWidget())
+#define TEXTEDIT_WIDGET(widget) (widget->getInputWidget())
+
 };
 
 #endif // PARAMSNGLOBFUNCTIONS_H

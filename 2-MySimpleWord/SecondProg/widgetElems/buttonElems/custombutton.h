@@ -16,12 +16,14 @@ public:
 
 signals:
     void signalToChangeColor();
+
 public slots:
     void changeColor();
     void changeIsActive();
+
 private:
     QBrush _brush;
-    bool _isActive = false;
+    bool _isActive;
 };
 
 #endif // CUSTOMBUTTON_H

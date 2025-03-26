@@ -5,6 +5,8 @@ CustomButton::CustomButton(QString text, QWidget *parent)
     this->setText(text);
     this->setParent(parent);
 
+    this->_isActive = false;
+
     QObject::connect(this, &CustomButton::signalToChangeColor, this, &CustomButton::changeColor);
 }
 

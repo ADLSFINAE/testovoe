@@ -1,39 +1,12 @@
 #include "panelwidget.h"
-#include <QMenu>
+
 PanelWidget::PanelWidget(QWidget *parent)
 {
     this->setParent(parent);
     this->show();
 
+    //Объявление кнопки File и создание выпадающего списка
     btnFile = new QPushButton("File", this);
-
-    btnSetFattFormat = new CustomButton("Жирный", this);
-    btnSetCursive = new CustomButton("Курсив", this);
-
-    btnOpenTable = new QPushButton("TRIE ALGO", this);
-
-    //коннекты для смены цвета - индикация состояния
-    QObject::connect(btnSetFattFormat, &QPushButton::clicked, btnSetFattFormat, &CustomButton::changeIsActive);
-    QObject::connect(btnSetCursive, &QPushButton::clicked, btnSetCursive, &CustomButton::changeIsActive);
-
-    layout = new QHBoxLayout(this);
-
-    layout->setSpacing(1);
-    layout->setContentsMargins(0, 0, 0, 0);
-
-    layout->addWidget(btnFile);
-    layout->addWidget(btnSetFattFormat);
-    layout->addWidget(btnSetCursive);
-    layout->addWidget(btnOpenTable);
-
-    // Выравнивание влево и вверх
-    layout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-
-    // Фиксируем минимальную высоту панели
-    setMinimumHeight(btnFile->sizeHint().height());
-
-    // Привязываем размер панели к содержимому
-    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     menu = new QMenu(this);
 
@@ -51,6 +24,32 @@ PanelWidget::PanelWidget(QWidget *parent)
     QObject::connect(actionClean.data(), &QAction::triggered, this, &PanelWidget::slotCleanTextEdit);
 
     btnFile->setMenu(menu);
+
+    //кнопки изменяющие стиль
+    btnSetFattFormat = new CustomButton("Жирный", this);
+    btnSetCursive = new CustomButton("Курсив", this);
+
+    btnOpenTable = new QPushButton("Live-Result", this);
+
+    //коннекты для смены цвета - индикация состояния
+    QObject::connect(btnSetFattFormat, &QPushButton::clicked, btnSetFattFormat, &CustomButton::changeIsActive);
+    QObject::connect(btnSetCursive, &QPushButton::clicked, btnSetCursive, &CustomButton::changeIsActive);
+
+    layout = new QHBoxLayout(this);
+
+    layout->addWidget(btnFile);
+    layout->addWidget(btnSetFattFormat);
+    layout->addWidget(btnSetCursive);
+    layout->addWidget(btnOpenTable);
+
+    // Выравнивание влево и вверх
+    layout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+    // Фиксируем минимальную высоту панели
+    setMinimumHeight(btnFile->sizeHint().height());
+
+    // Привязываем размер панели к содержимому
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
 void PanelWidget::slotOpenExplorerToSave()
@@ -64,7 +63,7 @@ void PanelWidget::slotOpenExplorerToSave()
                 this,
                 tr("Сохранить файл"),
                 QDir::homePath() + "/untitled.txt",  // Начальное имя файла
-                tr("Текстовые файлы (*.txt);;Все файлы (*)") // Фильтры
+                tr("Текстовые файлы (*.txt);") // Фильтры
                 );
 
     // Если пользователь не отменил диалог
@@ -100,7 +99,7 @@ void PanelWidget::slotOpenExplorerToLoad()
                 this,
                 "Выберите файл",
                 QDir::homePath(),
-                "Все файлы (*.*);;Текстовые файлы (*.txt);;Изображения (*.png *.jpg *.bmp)");
+                "Текстовые файлы (*.txt);");
 
     if (!filePath.isEmpty()) {
         qDebug() << "Выбран файл:" << filePath;
