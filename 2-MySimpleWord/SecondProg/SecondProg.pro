@@ -10,19 +10,23 @@ CONFIG += c++17
 
 SOURCES += \
     generaladapter.cpp \
+    logicElems/calcalgorithm.cpp \
     main.cpp \
     widgetElems/buttonElems/custombutton.cpp \
     widgetElems/customtextedit.cpp \
     widgetElems/generalwidget.cpp \
-    widgetElems/panelwidget.cpp
+    widgetElems/panelwidget.cpp \
+    widgetElems/tableElems/customtablewidget.cpp
 
 HEADERS += \
 	generaladapter.h \
+	logicElems/calcalgorithm.h \
 	paramsNglobFunctions.h \
 	widgetElems/buttonElems/custombutton.h \
 	widgetElems/customtextedit.h \
 	widgetElems/generalwidget.h \
-	widgetElems/panelwidget.h
+	widgetElems/panelwidget.h \
+	widgetElems/tableElems/customtablewidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -12,7 +12,7 @@ public:
 signals:
     void sendToAlgorithm(QString text);
 public slots:
-    void vivodddd();
+    void vivodddd(QMap<int, int> stats);
 };
 
 #endif // CUSTOMTEXTEDIT_H

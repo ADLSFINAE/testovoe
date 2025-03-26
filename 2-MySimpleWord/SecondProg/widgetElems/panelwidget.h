@@ -17,6 +17,13 @@ class PanelWidget : public QWidget
 public:
     PanelWidget() = default;
     PanelWidget(QWidget* parent);
+
+    QPushButton* getBtnFile() const{return btnFile;};
+    CustomButton* getBtnSetFattFormat() const{return btnSetFattFormat;};
+    CustomButton* getBtnSetCursive() const{return btnSetCursive;};
+    CustomButton* getBtnSetUnderLine() const{return btnSetUnderLine;};
+    QPushButton* getBtnOpenTable() const{return btnOpenTable;};
+
 public slots:
     void slotOpenExplorerToLoad();
     void slotOpenExplorerToSave();
@@ -26,6 +33,8 @@ private:
     CustomButton* btnSetFattFormat{nullptr};
     CustomButton* btnSetCursive{nullptr};
     CustomButton* btnSetUnderLine{nullptr};
+
+    QPushButton* btnOpenTable{nullptr};
 
     QSharedPointer<QAction> actionLoad{nullptr};
     QSharedPointer<QAction> actionSave{nullptr};

@@ -3,10 +3,9 @@
 CustomTextEdit::CustomTextEdit(QWidget *parent)
 {
     this->setParent(parent);
-    QObject::connect(this, &CustomTextEdit::textChanged, this, &CustomTextEdit::vivodddd);
 }
 
-void CustomTextEdit::vivodddd()
+void CustomTextEdit::vivodddd(QMap<int, int> stats)
 {
-    qDebug()<<this->toPlainText();
+
 }
