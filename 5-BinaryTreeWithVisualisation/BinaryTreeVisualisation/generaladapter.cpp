@@ -11,10 +11,11 @@ GeneralAdapter::GeneralAdapter()
 
     TreeAlgorithm* algo = new TreeAlgorithm();
 
-    QVector<int> vec = shitParser({1, 2, 3, 3, 4, NULL, NULL, 5,6,7,8,NULL,5,8,9});
+    QVector<int> vec = shitParser({1, 2, 3, 6, 4, NULL, 7, 5,NULL,7,NULL,NULL,5,8,9});
 
     visualController->setVecNums(algo->validateAndTrimTreeVector(vec));
-    for(auto& elem : algo->validateAndTrimTreeVector({1, 2, NULL, 3, 4, 5, 6})){
+    qDebug()<<"dsa;dkasdklasd";
+    for(auto& elem : algo->validateAndTrimTreeVector(vec)){
         qDebug()<<elem;
     }
 
