@@ -24,7 +24,8 @@ signals:
     void signalToSendPrimeNumber(const QString& text);
 public slots:
     void initVecBlocks(int N);
-    void changePos();
+    void changePosUp();
+    void changePosReturn();
 private:
     QVector<CustomBlock*> vecBlocks;
 };

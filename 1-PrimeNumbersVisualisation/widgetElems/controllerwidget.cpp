@@ -5,13 +5,15 @@ ControllerWidget::ControllerWidget(QWidget *parent)
     this->setParent(parent);
 
     // Создаем кнопки
-    btnInstaResult = new QPushButton("Instant Result", this);
+    btnUp = new QPushButton("Up", this);
+    btnReturn = new QPushButton("Return", this);
 
     // Создаем вертикальный layout
     layout = new QVBoxLayout(this);
 
     // Добавляем кнопки в layout
-    layout->addWidget(btnInstaResult);
+    layout->addWidget(btnUp);
+    layout->addWidget(btnReturn);
 
     // Опциональные настройки
     layout->setSpacing(1); // Расстояние между кнопками

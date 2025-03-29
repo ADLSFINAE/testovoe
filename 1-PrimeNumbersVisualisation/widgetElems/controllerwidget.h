@@ -12,9 +12,11 @@ public:
     ControllerWidget() = default;
     ControllerWidget(QWidget* parent);
 
-    QPushButton* getBtnInstaResult() const{return btnInstaResult;};
+    QPushButton* getBtnUp() const{return btnUp;};
+    QPushButton* getBtnReturn() const{return btnReturn;};
 private:
-    QPushButton* btnInstaResult{nullptr};
+    QPushButton* btnUp{nullptr};
+    QPushButton* btnReturn{nullptr};
 
     QVBoxLayout* layout{nullptr};
 };

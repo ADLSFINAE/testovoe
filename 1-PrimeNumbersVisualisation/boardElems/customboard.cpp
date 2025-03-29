@@ -13,6 +13,7 @@ CustomBoard::CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem *parent)
 
 void CustomBoard::initVecBlocks(int N)
 {
+    this->setPos(0, 0);
     //очистка доски и вектора для новых данных
     if(vecBlocks.size() > 0){
         for(auto& elem : vecBlocks)
@@ -103,15 +104,19 @@ void CustomBoard::initVecBlocks(int N)
 
 }
 
-void CustomBoard::changePos()
+void CustomBoard::changePosUp()
 {
+    qreal newY = this->pos().y() - 40;  // Двигаем вниз (+Y)
+    qreal maxY = this->rect().height();  // Максимальная граница
 
-    // тут нужно будет написать логику
-    int calc = vecBlocks.size() / 10;
+    // Если новая позиция выходит за пределы, ограничиваем её
+    if (newY > maxY)
+        newY = maxY;
 
-    int minY = 0;
-    int maxY = calc * 40;
-    if(this->pos().y() < maxY){
-        this->setPos(0, this->pos().y() - 40);
-    }
+    this->setPos(0, newY);
+}
+
+void CustomBoard::changePosReturn()
+{
+    this->setPos(0, 0);
 }

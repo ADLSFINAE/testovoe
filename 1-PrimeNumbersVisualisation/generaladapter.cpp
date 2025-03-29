@@ -27,8 +27,11 @@ GeneralAdapter::GeneralAdapter()
     QObject::connect(boardSolver, &CustomBoard::signalToSendPrimeNumber,
                      answerTextEdit, &AnswerTextEdit::appendOutput);
 
-    QObject::connect(generalWidget->getControllerWidget()->getBtnInstaResult(), &QPushButton::clicked,
-                     boardSolver, &CustomBoard::changePos);
+    QObject::connect(generalWidget->getControllerWidget()->getBtnUp(), &QPushButton::clicked,
+                     boardSolver, &CustomBoard::changePosUp);
+
+    QObject::connect(generalWidget->getControllerWidget()->getBtnReturn(), &QPushButton::clicked,
+                     boardSolver, &CustomBoard::changePosReturn);
 }
 
 void GeneralAdapter::cleanVecBlocks(QVector<CustomBlock *> vecBlocks)
