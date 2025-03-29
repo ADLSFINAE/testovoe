@@ -11,6 +11,13 @@ CustomBoard::CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem *parent)
     this->setRect(rectBoard);
 }
 
+QVector<CustomBlock *> CustomBoard::getVecBlocks() const
+{
+
+    return vecBlocks;
+
+}
+
 void CustomBoard::initVecBlocks(int N)
 {
     this->setPos(0, 0);
@@ -36,7 +43,8 @@ void CustomBoard::initVecBlocks(int N)
         }
         vecBlocks[i] = block;
     }
-    //исключительная ситуация
+
+    //исключительная ситуация 0 - простое число
     if(vecBlocks[0] != nullptr){
         vecBlocks[0]->changeColor(Qt::blue);
         vecBlocks[0]->setPrimeStatus(false);
@@ -106,12 +114,12 @@ void CustomBoard::initVecBlocks(int N)
 
 void CustomBoard::changePosUp()
 {
-    qreal newY = this->pos().y() - 40;  // Двигаем вниз (+Y)
-    qreal maxY = this->rect().height();  // Максимальная граница
+    qreal newY = this->pos().y() - 40;
+    qreal maxY = this->rect().height();
 
-    // Если новая позиция выходит за пределы, ограничиваем её
-    if (newY > maxY)
+    if (newY > maxY){
         newY = maxY;
+    }
 
     this->setPos(0, newY);
 }

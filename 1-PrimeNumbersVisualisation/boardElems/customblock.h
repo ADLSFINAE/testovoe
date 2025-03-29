@@ -16,20 +16,29 @@ class CustomBlock : public QObject, public QGraphicsRectItem
     Q_OBJECT
 public:
     CustomBlock() = default;
+
     CustomBlock(int x, int y, int number, QGraphicsRectItem* parentItem);
 
     void changeColor(QBrush brush);
 
-    QPointF getPos() const{return QPointF(x,y);};
-    int getNumber() const{return number;};
+    //получение приватных полей класса
+    QPointF getPos() const;
 
-    void setPrimeStatus(bool status){this->numberIsPrime = status;};
-    bool getPrimeStatus(){return numberIsPrime;};
+    int getNumber() const;
+
+    //геттер и сеттер - для простого числа
+    void setPrimeStatus(bool status);
+
+    bool getPrimeStatus();
 private:
     int x, y;
+
     QBrush color;
+
     int number;
+
     bool numberIsPrime = true;
+
     QGraphicsTextItem* textItem{nullptr};
 };
 

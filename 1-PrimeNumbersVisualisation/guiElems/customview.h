@@ -7,11 +7,17 @@ class CustomView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    CustomView(QRectF viewRect, QGraphicsScene* scene, QGraphicsView* view = nullptr);
+    CustomView() = default;
 
+    CustomView(QPointF viewSize, QGraphicsScene* scene, QGraphicsView* view = nullptr);
+
+protected:
     void mousePressEvent(QMouseEvent* event) override;
+
     void mouseReleaseEvent(QMouseEvent* event) override;
+
     void mouseMoveEvent(QMouseEvent* event) override;
+
 };
 
 #endif // CUSTOMVIEW_H

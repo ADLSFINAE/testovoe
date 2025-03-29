@@ -14,18 +14,23 @@ class CustomBoard : public QObject, public QGraphicsRectItem
     Q_OBJECT
 public:
     CustomBoard() = default;
+
     CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem* parent = nullptr);
 
-    QVector<CustomBlock*> getVecBlocks() const{
-        return vecBlocks;
-    }
+    QVector<CustomBlock*> getVecBlocks() const;
+
 signals:
     void cleanBoard();
+
     void signalToSendPrimeNumber(const QString& text);
+
 public slots:
     void initVecBlocks(int N);
+
     void changePosUp();
+
     void changePosReturn();
+
 private:
     QVector<CustomBlock*> vecBlocks;
 };

@@ -10,15 +10,20 @@ class ControllerWidget : public QWidget
     Q_OBJECT
 public:
     ControllerWidget() = default;
+
     ControllerWidget(QWidget* parent);
 
-    QPushButton* getBtnUp() const{return btnUp;};
-    QPushButton* getBtnReturn() const{return btnReturn;};
+    QPushButton* getBtnUp() const;
+
+    QPushButton* getBtnReturn() const;
+
 private:
     QPushButton* btnUp{nullptr};
+
     QPushButton* btnReturn{nullptr};
 
     QVBoxLayout* layout{nullptr};
+
 };
 
 #endif // CONTROLLERWIDGET_H

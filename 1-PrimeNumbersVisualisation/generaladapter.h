@@ -17,10 +17,12 @@ class GeneralAdapter : public QObject
     Q_OBJECT
 public:
     GeneralAdapter();
-public slots:
-    void cleanVecBlocks(QVector<CustomBlock*> vecBlocks);
+
+
+
 private:
     CustomScene* scene{nullptr};
+
     CustomView* view{nullptr};
 
     CustomBoard* boardSolver{nullptr};
@@ -28,6 +30,7 @@ private:
     GeneralWidget* generalWidget{nullptr};
 
     AnswerTextEdit* answerTextEdit{nullptr};
+
 };
 
 #endif // GENERALADAPTER_H

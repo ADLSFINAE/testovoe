@@ -6,40 +6,25 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "paramsNdefines.h"
+
 class AnswerTextEdit : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AnswerTextEdit(QWidget* parent = nullptr) : QWidget(parent)
-    {
-        // Многострочное поле вывода (только для чтения)
-        outputField = new QTextEdit(this);
-        outputField->setReadOnly(true);
-        outputField->setWordWrapMode(QTextOption::WordWrap);
-        outputField->setStyleSheet("QTextEdit { background: #f8f8f8; }");
+    AnswerTextEdit() = default;
 
-        // Кнопка очистки
-        QPushButton* clearBtn = new QPushButton("Clear Output", this);
-
-        // Компоновка
-        QVBoxLayout* layout = new QVBoxLayout(this);
-        layout->addWidget(outputField);
-        layout->addWidget(clearBtn);
-
-        connect(clearBtn, &QPushButton::clicked, outputField, &QTextEdit::clear);
-    }
+    AnswerTextEdit(QWidget* parent = nullptr);
 
 public slots:
-    void appendOutput(const QString& text) {
-        outputField->append(text);  // Добавляет текст с новой строки
-    }
-
-    void setOutput(const QString& text) {
-        outputField->setPlainText(text);  // Заменяет весь текст
-    }
+    void appendOutput(const QString& text);
 
 private:
-    QTextEdit* outputField;
+    QTextEdit* outputField{nullptr};
+
+    QPushButton* clearBtn{nullptr};
+
+    QVBoxLayout* layout{nullptr};
 };
 
 #endif // ANSWERTEXTEDIT_H

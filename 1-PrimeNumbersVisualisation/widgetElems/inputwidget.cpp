@@ -1,42 +1,42 @@
 #include "inputwidget.h"
 
-
 InputWidget::InputWidget(QWidget *parent)
 {
     this->setParent(parent);
     this->show();
-    // Создаем элементы интерфейса
+
     lineEdit = new QLineEdit(this);
+
     btnInputNumber = new QPushButton("Submit", this);
 
-    // Настраиваем валидатор для ввода чисел от 0 до maxN
-    QIntValidator* validator = new QIntValidator(0, 1000, this);
+    validator = new QIntValidator(2, 10000, this);
+
     lineEdit->setValidator(validator);
 
-    // Настраиваем layout
     QVBoxLayout* layout = new QVBoxLayout(this);
+
     layout->addWidget(lineEdit);
+
     layout->addWidget(btnInputNumber);
 
-    // Подключаем сигнал кнопки
-    connect(btnInputNumber, &QPushButton::clicked, this, &InputWidget::processInput);
+    QObject::connect(btnInputNumber, &QPushButton::clicked, this, &InputWidget::processInput);
 }
 
 void InputWidget::processInput()
 {
     if (lineEdit->text().isEmpty()) {
-        QMessageBox::warning(this, "Error", "Please enter a number");
+        QMessageBox::warning(nullptr, "Error", "Please enter a number");
         return;
     }
 
     bool ok;
     int value = lineEdit->text().toInt(&ok);
 
-    if (ok && value >= 1 && value <= 1000) {
-        emit numberSubmitted(value);  // Отправляем сигнал
-        lineEdit->clear();           // Очищаем поле
+    if (ok && value >= 2 && value <= 10000) {
+        emit numberSubmitted(value);
+        lineEdit->clear();
     } else {
-        QMessageBox::warning(this, "Error",
-            QString("Please enter a number between 0 and %1").arg(201));
+        QMessageBox::warning(nullptr, "Error",
+                             QString("Please enter a number between 2 and %1").arg(10000));
     }
 }
