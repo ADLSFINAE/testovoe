@@ -1,8 +1,4 @@
 #include "customboard.h"
-#include "guiElems/customscene.h"
-#include "logicElems/sieveeratosthenes.h"
-#include <QTimer>
-#include <QEventLoop>
 
 CustomBoard::CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem *parent)
     :QGraphicsRectItem(parent)
@@ -13,14 +9,13 @@ CustomBoard::CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem *parent)
 
 QVector<CustomBlock *> CustomBoard::getVecBlocks() const
 {
-
     return vecBlocks;
-
 }
 
 void CustomBoard::initVecBlocks(int N)
 {
     this->setPos(0, 0);
+
     //очистка доски и вектора для новых данных
     if(vecBlocks.size() > 0){
         for(auto& elem : vecBlocks)
@@ -44,6 +39,10 @@ void CustomBoard::initVecBlocks(int N)
         vecBlocks[i] = block;
     }
 
+    // Создаем массив для отметки простых чисел
+    QVector<bool> isPrime(N + 1, true);
+    isPrime[0] = isPrime[1] = false;
+
     //исключительная ситуация 0 - простое число
     if(vecBlocks[0] != nullptr){
         vecBlocks[0]->changeColor(Qt::blue);
@@ -55,26 +54,16 @@ void CustomBoard::initVecBlocks(int N)
         vecBlocks[1]->setPrimeStatus(false);
     }
 
-
-    // Создаем массив для отметки простых чисел
-    QVector<bool> isPrime(N + 1, true);
-    isPrime[0] = isPrime[1] = false;
-
-    // Алгоритм Решета Эратосфена
+    // Алгоритм Решета Эратосфена: https://ru.wikipedia.org/wiki/Решето_Эратосфена
     for (int p = 2; p * p <= N; ++p) {
         if (isPrime[p]) {
-            // Вычеркиваем все кратные p, начиная с p²
+            // Вычеркиваем все кратные p, начиная с p^2
             for (int i = p * p; i <= N; i += p) {
                 for(auto& elem : vecBlocks){
                     if(elem->getNumber() == i){
-                        // Задержка 1 секунда с обработкой событий
-                        QTimer timer;
-                        QEventLoop loop;
-                        timer.setSingleShot(true);
-                        QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-                        timer.start(10); // 1000 мс = 1 секунда
-                        loop.exec(); // Ожидаем завершения таймера
-                        QObject::disconnect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+                        if(isTimerOn){
+                            TimerForAnimation(25);
+                        }
                         elem->changeColor(Qt::red);
                         elem->setPrimeStatus(false);
                     }
@@ -87,13 +76,9 @@ void CustomBoard::initVecBlocks(int N)
 
     for(auto& elem : vecBlocks){
         if(elem->getPrimeStatus()){
-            QTimer timer;
-            QEventLoop loop;
-            timer.setSingleShot(true);
-            QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-            timer.start(40); // 1000 мс = 1 секунда
-            loop.exec(); // Ожидаем завершения таймера
-            QObject::disconnect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+            if(isTimerOn){
+                TimerForAnimation(50);
+            }
             elem->changeColor(Qt::green);
             emit signalToSendPrimeNumber(QString::number(elem->getNumber()));
         }
@@ -127,4 +112,9 @@ void CustomBoard::changePosUp()
 void CustomBoard::changePosReturn()
 {
     this->setPos(0, 0);
+}
+
+void CustomBoard::changeIsTimerOn()
+{
+    isTimerOn = !isTimerOn;
 }

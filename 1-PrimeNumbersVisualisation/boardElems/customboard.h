@@ -5,9 +5,13 @@
 #include <QObject>
 #include <QVector>
 #include <QDebug>
+#include <QTimer>
+#include <QEventLoop>
 
 #include "boardElems/customblock.h"
 #include "paramsNdefines.h"
+#include "guiElems/customscene.h"
+#include "logicElems/sieveeratosthenes.h"
 
 class CustomBoard : public QObject, public QGraphicsRectItem
 {
@@ -18,6 +22,16 @@ public:
     CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem* parent = nullptr);
 
     QVector<CustomBlock*> getVecBlocks() const;
+
+    void TimerForAnimation(int timeMS){
+        QTimer timer;
+        QEventLoop loop;
+        timer.setSingleShot(true);
+        QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+        timer.start(timeMS);
+        loop.exec();
+        QObject::disconnect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+    }
 
 signals:
     void cleanBoard();
@@ -31,8 +45,12 @@ public slots:
 
     void changePosReturn();
 
+    void changeIsTimerOn();
+
 private:
     QVector<CustomBlock*> vecBlocks;
+
+    bool isTimerOn = false;
 };
 
 #endif // CUSTOMBOARD_H

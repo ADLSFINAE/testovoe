@@ -19,6 +19,7 @@ InputWidget::InputWidget(QWidget *parent)
 
     layout->addWidget(btnInputNumber);
 
+    //коннект для вызова QMessageBox, если введенное значение не попало в допустимый интервал
     QObject::connect(btnInputNumber, &QPushButton::clicked, this, &InputWidget::processInput);
 }
 

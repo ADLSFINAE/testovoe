@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVector>
+#include "boardElems/customblock.h"
 
 class SieveEratosthenes : public QObject
 {

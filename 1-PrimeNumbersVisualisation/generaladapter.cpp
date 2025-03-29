@@ -3,19 +3,25 @@
 GeneralAdapter::GeneralAdapter()
 {
     scene = new CustomScene(GlobVal::sceneRect, nullptr);
+
     view = new CustomView(GlobVal::viewSize, scene, nullptr);
+
     view->show();
 
     boardSolver = new CustomBoard(GlobVal::boardSolver, 200, nullptr);
+
     scene->addItem(boardSolver);
 
     generalWidget = new GeneralWidget(nullptr);
 
     scene->addWidget(generalWidget);
+
     generalWidget->show();
 
     answerTextEdit = new AnswerTextEdit(nullptr);
+
     scene->addWidget(answerTextEdit);
+
     answerTextEdit->show();
 
     //коннект для инициализации доски значениями и ее отчистки от старый значений
@@ -33,4 +39,8 @@ GeneralAdapter::GeneralAdapter()
     //коннект для возвращения позиции доски
     QObject::connect(generalWidget->getControllerWidget()->getBtnReturn(), &QPushButton::clicked,
                      boardSolver, &CustomBoard::changePosReturn);
+
+    //коннект для выбора режима с таймером и без
+    QObject::connect(generalWidget->getControllerWidget()->getBtnOnTimer(), &QPushButton::clicked,
+                     boardSolver, &CustomBoard::changeIsTimerOn);
 }

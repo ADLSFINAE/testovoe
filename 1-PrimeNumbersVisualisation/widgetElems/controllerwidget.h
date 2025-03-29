@@ -17,10 +17,19 @@ public:
 
     QPushButton* getBtnReturn() const;
 
+    QPushButton* getBtnOnTimer() const;
+
+private slots:
+    void slotChangeColorBtnOnTimer();
+
 private:
     QPushButton* btnUp{nullptr};
 
     QPushButton* btnReturn{nullptr};
+
+    QPushButton* btnOnTimer{nullptr};
+
+    bool isTimerOn = false;
 
     QVBoxLayout* layout{nullptr};
 

@@ -18,8 +18,6 @@ class GeneralAdapter : public QObject
 public:
     GeneralAdapter();
 
-
-
 private:
     CustomScene* scene{nullptr};
 
