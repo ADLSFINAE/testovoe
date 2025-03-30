@@ -8,7 +8,7 @@ class CustomView : public QGraphicsView
     Q_OBJECT
 public:
     CustomView(QGraphicsScene* scene, QGraphicsView* view = nullptr);
-
+private:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;

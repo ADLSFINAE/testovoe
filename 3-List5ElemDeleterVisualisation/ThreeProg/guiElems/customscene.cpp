@@ -3,7 +3,7 @@
 CustomScene::CustomScene(QGraphicsScene *scene)
     :QGraphicsScene(scene)
 {
-    this->setSceneRect(0, 0, 800, 600);
+    this->setSceneRect(0, 0, 800, 800);
 }
 
 void CustomScene::mousePressEvent(QGraphicsSceneMouseEvent *event)

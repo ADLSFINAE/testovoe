@@ -14,6 +14,7 @@ SOURCES += \
     guiElems/customRectangle/itemscontroller.cpp \
     guiElems/customscene.cpp \
     guiElems/customview.cpp \
+    logicElems/list.cpp \
     logicElems/listalgorithm.cpp \
     main.cpp
 
@@ -25,6 +26,7 @@ HEADERS += \
 	guiElems/customRectangle/itemscontroller.h \
 	guiElems/customscene.h \
 	guiElems/customview.h \
+	logicElems/list.h \
 	logicElems/listalgorithm.h
 
 # Default rules for deployment.

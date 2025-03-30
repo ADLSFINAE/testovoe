@@ -4,7 +4,6 @@ CustomView::CustomView(QGraphicsScene* scene, QGraphicsView* view)
     :QGraphicsView(view)
 {
     this->setScene(scene);
-    this->resize(100, 100);
     this->showMaximized();
 }
 
