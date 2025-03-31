@@ -1,0 +1,17 @@
+debug/generaladapter.o
+debug/customrectangle.o
+debug/itemscontroller.o
+debug/customscene.o
+debug/customview.o
+debug/list.o
+debug/listalgorithm.o
+debug/main.o
+debug/inputwidget.o
+debug/qrc_res.o
+debug/moc_generaladapter.o
+debug/moc_customrectangle.o
+debug/moc_itemscontroller.o
+debug/moc_customscene.o
+debug/moc_customview.o
+debug/moc_listalgorithm.o
+debug/moc_inputwidget.o

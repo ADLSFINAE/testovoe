@@ -1,0 +1,17 @@
+release/generaladapter.o
+release/customrectangle.o
+release/itemscontroller.o
+release/customscene.o
+release/customview.o
+release/list.o
+release/listalgorithm.o
+release/main.o
+release/inputwidget.o
+release/qrc_res.o
+release/moc_generaladapter.o
+release/moc_customrectangle.o
+release/moc_itemscontroller.o
+release/moc_customscene.o
+release/moc_customview.o
+release/moc_listalgorithm.o
+release/moc_inputwidget.o

@@ -1,0 +1,11 @@
+debug/generaladapter.o
+debug/numbertoint32algorithm.o
+debug/main.o
+debug/generalwidget.o
+debug/infowidget.o
+debug/inputwidget.o
+debug/moc_generaladapter.o
+debug/moc_numbertoint32algorithm.o
+debug/moc_generalwidget.o
+debug/moc_infowidget.o
+debug/moc_inputwidget.o

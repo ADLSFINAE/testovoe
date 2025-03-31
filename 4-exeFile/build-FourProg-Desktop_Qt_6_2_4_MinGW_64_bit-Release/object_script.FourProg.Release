@@ -1,0 +1,11 @@
+release/generaladapter.o
+release/numbertoint32algorithm.o
+release/main.o
+release/generalwidget.o
+release/infowidget.o
+release/inputwidget.o
+release/moc_generaladapter.o
+release/moc_numbertoint32algorithm.o
+release/moc_generalwidget.o
+release/moc_infowidget.o
+release/moc_inputwidget.o

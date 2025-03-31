@@ -1,0 +1,15 @@
+release/generaladapter.o
+release/calcalgorithm.o
+release/main.o
+release/custombutton.o
+release/customtextedit.o
+release/generalwidget.o
+release/panelwidget.o
+release/customtablewidget.o
+release/moc_generaladapter.o
+release/moc_calcalgorithm.o
+release/moc_custombutton.o
+release/moc_customtextedit.o
+release/moc_generalwidget.o
+release/moc_panelwidget.o
+release/moc_customtablewidget.o

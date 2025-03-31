@@ -1,0 +1,15 @@
+debug/generaladapter.o
+debug/calcalgorithm.o
+debug/main.o
+debug/custombutton.o
+debug/customtextedit.o
+debug/generalwidget.o
+debug/panelwidget.o
+debug/customtablewidget.o
+debug/moc_generaladapter.o
+debug/moc_calcalgorithm.o
+debug/moc_custombutton.o
+debug/moc_customtextedit.o
+debug/moc_generalwidget.o
+debug/moc_panelwidget.o
+debug/moc_customtablewidget.o
