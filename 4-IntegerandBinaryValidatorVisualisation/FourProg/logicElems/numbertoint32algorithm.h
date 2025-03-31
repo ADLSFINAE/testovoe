@@ -23,7 +23,7 @@ private slots:
 private:
     QPair<quint32, quint32> _ans;
 
-    quint32 number;
+    quint32 _number;
 
 };
 

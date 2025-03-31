@@ -3,6 +3,11 @@
 
 #include <QWidget>
 #include <bitset>
+#include <QVBoxLayout>
+#include <QFrame>
+#include <QFont>
+#include <QSpacerItem>
+
 #include "widgetElems/infowidget.h"
 #include "widgetElems/inputwidget.h"
 
@@ -16,30 +21,15 @@ public:
 
     QFrame* createStyledFrame(QWidget *content, bool stretchContent);
 
-    InfoWidget* getInfoWidgetVals() const{return infoWidgetVals;}
+    InfoWidget* getInfoWidgetVals() const;
 
-    InfoWidget* getInfoWidgetMin() const{return infoWidgetMin;}
+    InfoWidget* getInfoWidgetMin() const;
 
-    InfoWidget* getInfoWidgetMax() const{return infoWidgetMax;}
+    InfoWidget* getInfoWidgetMax() const;
 
-    InputWidget* getInputWidget() const{return inputWidget;}
+    InputWidget* getInputWidget() const;
 
-    QString bitsetToQString(const std::bitset<32>& bits, bool withSpaces = true, bool reverse = false)
-    {
-        QString result = QString::fromStdString(bits.to_string());
-
-        if (reverse) {
-            std::reverse(result.begin(), result.end());
-        }
-
-        if (withSpaces && 32 > 4) {
-            for (int i = result.length() - 4; i > 0; i -= 4) {
-                result.insert(i, ' ');
-            }
-        }
-
-        return result;
-    }
+    QString bitsetToQString(const std::bitset<32>& bits, bool withSpaces = true, bool reverse = false);
 
 public slots:
     void slotSetNumberLabelValues(quint32 number);
@@ -49,17 +39,28 @@ public slots:
     void slotSetNumberLabelMax(quint32 number);
 
 private:
-    InfoWidget* infoWidgetVals{nullptr};
-    InfoWidget* infoWidgetMin{nullptr};
-    InfoWidget* infoWidgetMax{nullptr};
+    InfoWidget* _infoWidgetVals{nullptr};
 
-    InputWidget* inputWidget{nullptr};
+    InfoWidget* _infoWidgetMin{nullptr};
 
-    quint32 currentIntegerForValues;
+    InfoWidget* _infoWidgetMax{nullptr};
 
-    quint32 currentIntegerForMin;
+    InputWidget* _inputWidget{nullptr};
 
-    quint32 currentIntergerForMax;
+    QFont _labelFont;
+
+    QFrame* _valuesFrame{nullptr};
+    QFrame* _minFrame{nullptr};
+    QFrame* _maxFrame{nullptr};
+    QFrame* _inputFrame{nullptr};
+
+    QVBoxLayout* _mainLayout{nullptr};
+
+    quint32 _currentIntegerForValues;
+
+    quint32 _currentIntegerForMin;
+
+    quint32 _currentIntergerForMax;
 };
 
 #endif // GENERALWIDGET_H

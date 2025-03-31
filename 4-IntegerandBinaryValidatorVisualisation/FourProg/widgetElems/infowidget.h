@@ -14,24 +14,25 @@ class InfoWidget : public QWidget
     Q_OBJECT
 public:
     InfoWidget() = default;
+
     InfoWidget(QString nameOfLine, QWidget *parent);
 
-    QLabel* getIntergerValueLabel() const{return integerValueLabel;}
+    QLabel* getIntegerValueLabel() const;
 
-    QLabel* getHexValueLabel() const{return integerValueLabel;}
+    QLabel* getHexValueLabel() const;
 
-    void setIntegerValueLabel(QString text){integerValueLabel->setText(text);}
+    void setIntegerValueLabel(QString text);
 
-    void setHexValueLabel(QString text){hexValueLabel->setText(text);}
+    void setBinaryValueLabel(QString text);
 
 private:
-    QLabel* typeLabel{nullptr};
+    QLabel* _typeLabel{nullptr};
 
-    QLabel* integerValueLabel{nullptr};
+    QLabel* _integerValueLabel{nullptr};
 
-    QLabel* hexValueLabel{nullptr};
+    QLabel* _binaryValueLabel{nullptr};
 
-    QHBoxLayout* layout{nullptr};
+    QHBoxLayout* _layout{nullptr};
 };
 
 #endif // INFOWIDGET_H

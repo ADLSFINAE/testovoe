@@ -2,29 +2,35 @@
 
 InputWidget::InputWidget(QWidget *parent) : QWidget(parent)
 {
-    numberInput = new QLineEdit(this);
-    btnInput = new QPushButton("Ввести число", this);
+    _numberInput = new QLineEdit(this);
+
+    _btnInput = new QPushButton("Ввести число", this);
 
     /*QIntValidator *validator = new QIntValidator(0, 4294967295, this);
     numberInput->setValidator(validator);
     numberInput->setPlaceholderText("Введите число от 1 до 4 294 967 295");*/
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(numberInput);
-    layout->addWidget(btnInput);
+    _layout = new QVBoxLayout(this);
+
+    _layout->addWidget(_numberInput);
+
+    _layout->addWidget(_btnInput);
+
 }
 
 QPushButton *InputWidget::getInputButton() const
 {
-    return btnInput;
+    return _btnInput;
 }
 
 #include <QMessageBox>
 
 quint32 InputWidget::getInputText() const
 {
-    QString input = numberInput->text();
+    QString input = _numberInput->text();
+
     bool ok;
+
     quint32 value = input.toUInt(&ok);
 
     if (!ok || input.toULongLong() > 4294967295) {
@@ -43,5 +49,7 @@ quint32 InputWidget::getInputText() const
 void InputWidget::slotGetNumber()
 {
     emit signalSendNumber(getInputText());
-    numberInput->setText(0);
+
+    _numberInput->setText(0);
+
 }

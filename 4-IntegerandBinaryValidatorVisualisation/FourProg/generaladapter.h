@@ -14,18 +14,18 @@ public:
 
 signals:
     void signalLabel1(quint32 numberFromInput);
+
     void signalLabel2(quint32 numberFromInput);
+
     void signalLabel3(quint32 numberFromInput);
 
 private slots:
     void slotGetNumberFromInput(quint32 numberFromInput);
 
-    void slotSetValues();
-
 private:
-    GeneralWidget* generalWidget{nullptr};
+    GeneralWidget* _generalWidget{nullptr};
 
-    NumberToInt32Algorithm* numAlgos{nullptr};
+    NumberToInt32Algorithm* _numAlgos{nullptr};
 
     int _numberFromInput;
 };

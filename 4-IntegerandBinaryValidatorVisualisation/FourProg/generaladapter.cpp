@@ -2,39 +2,34 @@
 
 GeneralAdapter::GeneralAdapter()
 {
-    generalWidget = new GeneralWidget(nullptr);
-    generalWidget->show();
+    _generalWidget = new GeneralWidget(nullptr);
+    _generalWidget->show();
 
-    numAlgos = new NumberToInt32Algorithm();
+    _numAlgos = new NumberToInt32Algorithm();
 
-    QObject::connect(generalWidget->getInputWidget()->getInputButton(), &QPushButton::clicked,
-                     generalWidget->getInputWidget(), &InputWidget::slotGetNumber);
+    QObject::connect(_generalWidget->getInputWidget()->getInputButton(), &QPushButton::clicked,
+                     _generalWidget->getInputWidget(), &InputWidget::slotGetNumber);
 
-    QObject::connect(generalWidget->getInputWidget(), &InputWidget::signalSendNumber,
+    QObject::connect(_generalWidget->getInputWidget(), &InputWidget::signalSendNumber,
                      this, &GeneralAdapter::slotGetNumberFromInput);
 
     QObject::connect(this, &GeneralAdapter::signalLabel1,
-                     generalWidget, &GeneralWidget::slotSetNumberLabelValues);
+                     _generalWidget, &GeneralWidget::slotSetNumberLabelValues);
 
     QObject::connect(this, &GeneralAdapter::signalLabel2,
-                     generalWidget, &GeneralWidget::slotSetNumberLabelMin);
+                     _generalWidget, &GeneralWidget::slotSetNumberLabelMin);
 
     QObject::connect(this, &GeneralAdapter::signalLabel3,
-                     generalWidget, &GeneralWidget::slotSetNumberLabelMax);
+                     _generalWidget, &GeneralWidget::slotSetNumberLabelMax);
 }
 
 void GeneralAdapter::slotGetNumberFromInput(quint32 numberFromInput)
 {
     this->_numberFromInput = numberFromInput;
 
-    QPair<quint32, quint32> minAndMaxVals = numAlgos->algorithm(_numberFromInput);
+    QPair<quint32, quint32> minAndMaxVals = _numAlgos->algorithm(_numberFromInput);
 
     emit signalLabel1(_numberFromInput);
     emit signalLabel2(minAndMaxVals.first);
     emit signalLabel3(minAndMaxVals.second);
-}
-
-void GeneralAdapter::slotSetValues()
-{
-
 }

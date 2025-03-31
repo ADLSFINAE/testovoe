@@ -1,39 +1,49 @@
 #include "generalwidget.h"
-#include <QVBoxLayout>
-#include <QFrame>
-#include <QFont>
-#include <QSpacerItem>
 
 GeneralWidget::GeneralWidget(QWidget *parent)
     : QWidget(parent)
 {
-    infoWidgetVals = new InfoWidget("Values:", this);
-    infoWidgetMin = new InfoWidget("Min Value:", this);
-    infoWidgetMax = new InfoWidget("Max Value:", this);
-    inputWidget = new InputWidget(this);
+    _infoWidgetVals = new InfoWidget("Values:", this);
 
-    QFont labelFont("Arial", 10, QFont::Bold);
-    infoWidgetVals->setFont(labelFont);
-    infoWidgetMin->setFont(labelFont);
-    infoWidgetMax->setFont(labelFont);
+    _infoWidgetMin = new InfoWidget("Min Value:", this);
 
-    QFrame* valuesFrame = createStyledFrame(infoWidgetVals, true);
-    QFrame* minFrame = createStyledFrame(infoWidgetMin, true);
-    QFrame* maxFrame = createStyledFrame(infoWidgetMax, true);
-    QFrame* inputFrame = createStyledFrame(inputWidget, false);
+    _infoWidgetMax = new InfoWidget("Max Value:", this);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    mainLayout->setContentsMargins(15, 15, 15, 15);
-    mainLayout->setSpacing(15);
+    _inputWidget = new InputWidget(this);
 
-    mainLayout->addWidget(valuesFrame, 3);
-    mainLayout->addWidget(minFrame, 1);
-    mainLayout->addWidget(maxFrame, 1);
-    mainLayout->addWidget(inputFrame, 1);
+    _labelFont = QFont("Arial", 10, QFont::Bold);
 
-    mainLayout->addStretch(1);
+    _infoWidgetVals->setFont(_labelFont);
 
-    setStyleSheet(R"(
+    _infoWidgetMin->setFont(_labelFont);
+
+    _infoWidgetMax->setFont(_labelFont);
+
+    _valuesFrame = createStyledFrame(_infoWidgetVals, true);
+
+    _minFrame = createStyledFrame(_infoWidgetMin, true);
+
+    _maxFrame = createStyledFrame(_infoWidgetMax, true);
+
+    _inputFrame = createStyledFrame(_inputWidget, false);
+
+    _mainLayout = new QVBoxLayout(this);
+
+    _mainLayout->setContentsMargins(15, 15, 15, 15);
+
+    _mainLayout->setSpacing(15);
+
+    _mainLayout->addWidget(_valuesFrame, 3);
+
+    _mainLayout->addWidget(_minFrame, 2);
+
+    _mainLayout->addWidget(_maxFrame, 2);
+
+    _mainLayout->addWidget(_inputFrame, 3);
+
+    _mainLayout->addStretch(1);
+
+    this->setStyleSheet(R"(
         QFrame {
             background-color: #f5f5f5;
             border-radius: 8px;
@@ -45,74 +55,122 @@ GeneralWidget::GeneralWidget(QWidget *parent)
         }
     )");
 
-    showMaximized();
+    this->showMaximized();
 }
 
 QFrame* GeneralWidget::createStyledFrame(QWidget *content, bool stretchContent)
 {
     QFrame *frame = new QFrame(this);
+
     frame->setFrameShape(QFrame::StyledPanel);
+
     frame->setFrameShadow(QFrame::Raised);
 
     QVBoxLayout *frameLayout = new QVBoxLayout(frame);
+
     frameLayout->setContentsMargins(10, 10, 10, 10);
+
     frameLayout->addWidget(content);
 
-    if (stretchContent) {
+    if(stretchContent){
         frameLayout->addStretch();
         content->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    } else {
+    }
+
+    else{
         content->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     }
 
     return frame;
 }
 
+InfoWidget *GeneralWidget::getInfoWidgetVals() const{
+    return _infoWidgetVals;
+}
+
+InfoWidget *GeneralWidget::getInfoWidgetMin() const{
+    return _infoWidgetMin;
+}
+
+InfoWidget *GeneralWidget::getInfoWidgetMax() const{
+    return _infoWidgetMax;
+}
+
+InputWidget *GeneralWidget::getInputWidget() const{
+    return _inputWidget;
+}
+
+QString GeneralWidget::bitsetToQString(const std::bitset<32> &bits, bool withSpaces, bool reverse)
+{
+    QString result = QString::fromStdString(bits.to_string());
+
+    if (reverse) {
+        std::reverse(result.begin(), result.end());
+    }
+
+    if (withSpaces && 32 > 4) {
+        for (int i = result.length() - 4; i > 0; i -= 4) {
+            result.insert(i, ' ');
+        }
+    }
+
+    return result;
+}
+
 void GeneralWidget::slotSetNumberLabelValues(quint32 number)
 {
-    this->currentIntegerForValues = number;
-    if(number <= 4294967295){
-        infoWidgetVals->setIntegerValueLabel(QString::number(currentIntegerForValues));
+    this->_currentIntegerForValues = number;
 
-        infoWidgetVals->setHexValueLabel(bitsetToQString(std::bitset<32>(currentIntegerForValues)));
+    if(number <= static_cast<quint32>(4294967295)){
+        _infoWidgetVals->setIntegerValueLabel(QString::number(_currentIntegerForValues));
+
+        _infoWidgetVals->setBinaryValueLabel(bitsetToQString(std::bitset<32>(_currentIntegerForValues)));
+
     }
     else{
-        infoWidgetVals->setIntegerValueLabel(QString("IS OUT OF RANGE"));
+        _infoWidgetVals->setIntegerValueLabel(QString("IS OUT OF RANGE"));
 
-        infoWidgetVals->setHexValueLabel(bitsetToQString(std::bitset<32>(0)));
+        _infoWidgetVals->setBinaryValueLabel(bitsetToQString(std::bitset<32>(0)));
+
     }
 
 }
 
 void GeneralWidget::slotSetNumberLabelMin(quint32 number)
 {
-    this->currentIntegerForMin = number;
-    if(number <= 4294967295){
-        infoWidgetMin->setIntegerValueLabel(QString::number(currentIntegerForMin));
+    this->_currentIntegerForMin = number;
 
-        infoWidgetMin->setHexValueLabel(bitsetToQString(std::bitset<32>(currentIntegerForMin)));
+    if(number <= static_cast<quint32>(4294967295)){
+        _infoWidgetMin->setIntegerValueLabel(QString::number(_currentIntegerForMin));
+
+        _infoWidgetMin->setBinaryValueLabel(bitsetToQString(std::bitset<32>(_currentIntegerForMin)));
+
     }
     else{
-        infoWidgetMin->setIntegerValueLabel(QString("IS OUT OF RANGE"));
+        _infoWidgetMin->setIntegerValueLabel(QString("IS OUT OF RANGE"));
 
-        infoWidgetMin->setHexValueLabel(bitsetToQString(std::bitset<32>(0)));
+        _infoWidgetMin->setBinaryValueLabel(bitsetToQString(std::bitset<32>(0)));
+
     }
 
 }
 
 void GeneralWidget::slotSetNumberLabelMax(quint32 number)
 {
-    this->currentIntergerForMax = number;
-    qDebug()<<number;
-    if(number <= 4294967295){
-        infoWidgetMax->setIntegerValueLabel(QString::number(currentIntergerForMax));
+    this->_currentIntergerForMax = number;
 
-        infoWidgetMax->setHexValueLabel(bitsetToQString(std::bitset<32>(currentIntergerForMax)));
+    if(number <= static_cast<quint32>(4294967295)){
+        _infoWidgetMax->setIntegerValueLabel(QString::number(_currentIntergerForMax));
+
+        _infoWidgetMax->setBinaryValueLabel(bitsetToQString(std::bitset<32>(_currentIntergerForMax)));
+
     }
     else{
-        infoWidgetMax->setIntegerValueLabel(QString("IS OUT OF RANGE"));
+        _infoWidgetMax->setIntegerValueLabel(QString("IS OUT OF RANGE"));
 
-        infoWidgetMax->setHexValueLabel(bitsetToQString(std::bitset<32>(0)));
+        _infoWidgetMax->setBinaryValueLabel(bitsetToQString(std::bitset<32>(0)));
+
     }
+
 }
 

@@ -4,17 +4,33 @@ InfoWidget::InfoWidget(QString nameOfLine, QWidget *parent)
 {
     this->setParent(parent);
 
-    typeLabel = new QLabel(nameOfLine, this);
+    _typeLabel = new QLabel(nameOfLine, this);
 
-    integerValueLabel = new QLabel("int", this);
+    _integerValueLabel = new QLabel("integer", this);
 
-    hexValueLabel = new QLabel("hex", this);
+    _binaryValueLabel = new QLabel("binary", this);
 
-    layout = new QHBoxLayout(this);
-    layout->addWidget(typeLabel);
-    layout->addWidget(integerValueLabel);
-    layout->addWidget(hexValueLabel);
+    _layout = new QHBoxLayout(this);
+    _layout->addWidget(_typeLabel);
+    _layout->addWidget(_integerValueLabel);
+    _layout->addWidget(_binaryValueLabel);
 
-    layout->setSpacing(10);
+    _layout->setSpacing(10);
 
+}
+
+QLabel *InfoWidget::getIntegerValueLabel() const{
+    return _integerValueLabel;
+}
+
+QLabel *InfoWidget::getHexValueLabel() const{
+    return _integerValueLabel;
+}
+
+void InfoWidget::setIntegerValueLabel(QString text){
+    _integerValueLabel->setText(text);
+}
+
+void InfoWidget::setBinaryValueLabel(QString text){
+    _binaryValueLabel->setText(text);
 }
