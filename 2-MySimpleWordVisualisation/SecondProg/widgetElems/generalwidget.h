@@ -14,15 +14,20 @@ class GeneralWidget : public QWidget
     Q_OBJECT
 public:
     GeneralWidget() = default;
+
     GeneralWidget(QWidget* parent = nullptr);
 
-    PanelWidget* getPanelWidget()const{return panWgt;};
-    CustomTextEdit* getInputWidget()const{return inputWgt;};
+    PanelWidget* getPanelWidget()const;
+
+    CustomTextEdit* getInputWidget()const;
 
 private:
-    PanelWidget* panWgt{nullptr};
-    CustomTextEdit* inputWgt{nullptr};
-    QVBoxLayout *mainLayout{nullptr};
+    PanelWidget* _panWgt{nullptr};
+
+    CustomTextEdit* _inputWgt{nullptr};
+
+    QVBoxLayout* _mainLayout{nullptr};
+
 };
 
 #endif // GENERALWIDGET_H

@@ -8,5 +8,7 @@ int main(int argc, char *argv[])
 
     GeneralAdapter* generalAdapter = new GeneralAdapter();
 
+    Q_UNUSED(generalAdapter)
+
     return a.exec();
 }

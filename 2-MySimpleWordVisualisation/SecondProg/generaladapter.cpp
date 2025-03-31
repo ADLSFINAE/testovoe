@@ -3,85 +3,83 @@
 GeneralAdapter::GeneralAdapter()
 {
 
-    genWgt = new GeneralWidget(nullptr);
-    genWgt->show();
+    _genWgt = new GeneralWidget(nullptr);
+    _genWgt->show();
 
     //создание таблицы
-    QObject::connect(PANEL_WIDGET(genWgt)->getBtnOpenTable(), &QPushButton::clicked,
+    QObject::connect(PANEL_WIDGET(_genWgt)->getBtnOpenTable(), &QPushButton::clicked,
                      this, &GeneralAdapter::slotCreateTableWidget);
     //запуск алгоритма для таблицы
-    QObject::connect(TEXTEDIT_WIDGET(genWgt), &QTextEdit::textChanged,
+    QObject::connect(TEXTEDIT_WIDGET(_genWgt), &QTextEdit::textChanged,
                      this, &GeneralAdapter::slotForCallBackToStartAlgorithm);
 
     //кнопки для изменения стиля
-    QObject::connect(PANEL_WIDGET(genWgt)->getBtnSetFattFormat(), &QPushButton::clicked,
+    QObject::connect(PANEL_WIDGET(_genWgt)->getBtnSetFattFormat(), &QPushButton::clicked,
                      this, &GeneralAdapter::slotToCallSetBold);
 
     QObject::connect(this, &GeneralAdapter::signalSetBold,
-                     TEXTEDIT_WIDGET(genWgt), &CustomTextEdit::slotSetBoldText);
+                     TEXTEDIT_WIDGET(_genWgt), &CustomTextEdit::slotSetBoldText);
 
-    QObject::connect(PANEL_WIDGET(genWgt)->getBtnSetCursiveFormat(), &QPushButton::clicked,
+    QObject::connect(PANEL_WIDGET(_genWgt)->getBtnSetCursiveFormat(), &QPushButton::clicked,
                      this, &GeneralAdapter::slotToCallSetCursive);
 
     QObject::connect(this, &GeneralAdapter::signalSetCursive,
-                     TEXTEDIT_WIDGET(genWgt), &CustomTextEdit::slotSetCursiveText);
+                     TEXTEDIT_WIDGET(_genWgt), &CustomTextEdit::slotSetCursiveText);
 
     //коннект для загрузки файла
-    QObject::connect(PANEL_WIDGET(genWgt), &PanelWidget::signalTextLoadToTextEdit,
+    QObject::connect(PANEL_WIDGET(_genWgt), &PanelWidget::signalTextLoadToTextEdit,
                      this, &GeneralAdapter::slotSetTextFromLoadTxtFile);
 
     //коннект для сохранения файла
-    QObject::connect(PANEL_WIDGET(genWgt), &PanelWidget::signalToGetTextFromTextEdit,
+    QObject::connect(PANEL_WIDGET(_genWgt), &PanelWidget::signalToGetTextFromTextEdit,
                      this, &GeneralAdapter::slotSetTextForSaveInTxtFile);
 
     //коннект для очистки бляяяяяяяяя
-    QObject::connect(PANEL_WIDGET(genWgt), &PanelWidget::signalCleanTextEdit,
+    QObject::connect(PANEL_WIDGET(_genWgt), &PanelWidget::signalCleanTextEdit,
                      this, &GeneralAdapter::slotCleanTextEditFromText);
 
-    calcAlgo = new CalcAlgorithm();
+    _calcAlgo = new CalcAlgorithm();
 
-    //customtextedit -> отправит сигнал textChanged() -> который вызовет здесь метод с пустыми параметрами
-    //в этом методе вызовем calcAlgo->inputText(text), где текст для него получим из объекта CustomTextEdit::toPlainText();
 }
 
 void GeneralAdapter::slotToCallSetBold()
 {
-    emit signalSetBold(PANEL_WIDGET(genWgt)->getBtnSetFattFormat()->getIsActive());
+    emit signalSetBold(PANEL_WIDGET(_genWgt)->getBtnSetFattFormat()->getIsActive());
 }
 
 void GeneralAdapter::slotToCallSetCursive()
 {
-    emit signalSetCursive(PANEL_WIDGET(genWgt)->getBtnSetCursiveFormat()->getIsActive());
+    emit signalSetCursive(PANEL_WIDGET(_genWgt)->getBtnSetCursiveFormat()->getIsActive());
 }
 
 void GeneralAdapter::slotCreateTableWidget()
 {
-    tableWgt = new CustomTableWidget;
+    _tableWgt = new CustomTableWidget;
+
     QObject::connect(this, &GeneralAdapter::signalToRedrawTableWidget,
-                     tableWgt, &CustomTableWidget::slotToDoTable);
-    emit signalToRedrawTableWidget(calcAlgo->countWordLengthsSimple(TEXTEDIT_WIDGET(genWgt)->toPlainText()));
-    tableWgt->show();
+                     _tableWgt, &CustomTableWidget::slotToDoTable);
+
+    emit signalToRedrawTableWidget(_calcAlgo->countWordLengthsSimple(TEXTEDIT_WIDGET(_genWgt)->toPlainText()));
+
+    _tableWgt->show();
 }
 
 void GeneralAdapter::slotForCallBackToStartAlgorithm()
 {
-    //calcAlgo->inputText(genWgt->getInputWidget()->toPlainText());
-    emit signalToRedrawTableWidget(calcAlgo->countWordLengthsSimple(TEXTEDIT_WIDGET(genWgt)->toPlainText()));
-    //дальше тут добавляем emit signalToRedrawTableWidget(QVector<QVector<int, int>>)
-    //этот сигнал связываем с tablewidget - заполняем таблицу заново
+    emit signalToRedrawTableWidget(_calcAlgo->countWordLengthsSimple(TEXTEDIT_WIDGET(_genWgt)->toPlainText()));
 }
 
 void GeneralAdapter::slotSetTextFromLoadTxtFile(QString text)
 {
-    TEXTEDIT_WIDGET(genWgt)->append(text);
+    TEXTEDIT_WIDGET(_genWgt)->append(text);
 }
 
 void GeneralAdapter::slotSetTextForSaveInTxtFile()
 {
-    PANEL_WIDGET(genWgt)->setTextForSaving(QString(TEXTEDIT_WIDGET(genWgt)->toPlainText()));
+    PANEL_WIDGET(_genWgt)->setTextForSaving(QString(TEXTEDIT_WIDGET(_genWgt)->toPlainText()));
 }
 
 void GeneralAdapter::slotCleanTextEditFromText()
 {
-    TEXTEDIT_WIDGET(genWgt)->clear();
+    TEXTEDIT_WIDGET(_genWgt)->clear();
 }

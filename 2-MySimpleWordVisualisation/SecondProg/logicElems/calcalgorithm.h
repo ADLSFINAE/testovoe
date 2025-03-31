@@ -8,16 +8,14 @@
 #include <QRegularExpression>
 #include <QDebug>
 
-class CalcAlgorithm
+class CalcAlgorithm : public QObject
 {
-    //Q_OBJECT
+    Q_OBJECT
 public:
-    CalcAlgorithm(){};
+    CalcAlgorithm() = default;
 
     QMap<int, int> countWordLengthsSimple(QString text);
 
-private:
-    QString sampleText;
 };
 
 #endif // CALCALGORITHM_H

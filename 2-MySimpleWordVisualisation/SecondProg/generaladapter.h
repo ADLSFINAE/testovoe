@@ -21,23 +21,31 @@ signals:
     void signalToRedrawTableWidget(QMap<int, int> stats);
 
     void signalSetBold(bool bold);
-    void signalSetCursive(bool cursive);
-public slots:
 
+    void signalSetCursive(bool cursive);
+
+public slots:
     void slotToCallSetBold();
+
     void slotToCallSetCursive();
 
     void slotCreateTableWidget();
+
     void slotForCallBackToStartAlgorithm();
 
     void slotSetTextFromLoadTxtFile(QString text);
+
     void slotSetTextForSaveInTxtFile();
+
     void slotCleanTextEditFromText();
 
 private:
-    GeneralWidget* genWgt{nullptr};
-    CustomTableWidget* tableWgt{nullptr};
-    CalcAlgorithm* calcAlgo{nullptr};
+    GeneralWidget* _genWgt{nullptr};
+
+    CustomTableWidget* _tableWgt{nullptr};
+
+    CalcAlgorithm* _calcAlgo{nullptr};
+
 };
 
 #endif // GENERALADAPTER_H

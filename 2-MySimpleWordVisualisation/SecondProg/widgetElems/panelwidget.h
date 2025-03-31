@@ -17,50 +17,59 @@ class PanelWidget : public QWidget
     Q_OBJECT
 public:
     PanelWidget() = default;
+
     PanelWidget(QWidget* parent);
 
-    QPushButton* getBtnFile() const{return btnFile;};
+    QPushButton* getBtnFile() const;
 
-    CustomButton* getBtnSetFattFormat() const{return btnSetFattFormat;};
-    CustomButton* getBtnSetCursiveFormat() const{return btnSetCursive;};
+    CustomButton* getBtnSetFattFormat() const;
 
-    void setTextForSaving(QString text){this->m_currentText = text;};
+    CustomButton* getBtnSetCursiveFormat() const;
 
-    QPushButton* getBtnOpenTable() const{return btnOpenTable;};
+    void setTextForSaving(QString text);
+
+    QPushButton* getBtnOpenTable() const;
 
 signals:
     void signalTextLoadToTextEdit(QString text);
+
     void signalToGetTextFromTextEdit();
+
     void signalCleanTextEdit();
 
 public slots:
     void slotOpenExplorerToLoad();
+
     void slotOpenExplorerToSave();
+
     void slotCleanTextEdit();
 
 private:
     //кнопка открывающая менюху
-    QPushButton* btnFile{nullptr};
+    QPushButton* _btnFile{nullptr};
 
     //Элементы выпадающего меню-бара
-    QSharedPointer<QAction> actionLoad{nullptr};
-    QSharedPointer<QAction> actionSave{nullptr};
-    QSharedPointer<QAction> actionClean{nullptr};
+    QSharedPointer<QAction> _actionLoad{nullptr};
 
-    //менюха для компоновки QAction
-    QMenu *menu{nullptr};
+    QSharedPointer<QAction> _actionSave{nullptr};
 
-    QHBoxLayout* layout{nullptr};
+    QSharedPointer<QAction> _actionClean{nullptr};
+
+    //меню для компоновки QAction
+    QMenu* _menu{nullptr};
+
+    QHBoxLayout* _layout{nullptr};
 
     //кнопки выбора форматирования текста
-    CustomButton* btnSetFattFormat{nullptr};
-    CustomButton* btnSetCursive{nullptr};
+    CustomButton* _btnSetFattFormat{nullptr};
+
+    CustomButton* _btnSetCursive{nullptr};
 
     //кнопка открывающая кастомный QTableWidget
-    QPushButton* btnOpenTable{nullptr};
+    QPushButton* _btnOpenTable{nullptr};
 
-private:
-    QString m_currentText;
+    QString _m_currentText;
+
 };
 
 #endif // PANELWIDGET_H

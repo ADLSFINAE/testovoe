@@ -6,57 +6,85 @@ PanelWidget::PanelWidget(QWidget *parent)
     this->show();
 
     //Объявление кнопки File и создание выпадающего списка
-    btnFile = new QPushButton("File", this);
+    _btnFile = new QPushButton("File", this);
 
-    menu = new QMenu(this);
+    _menu = new QMenu(this);
 
-    actionLoad = QSharedPointer<QAction>(new QAction(QString("Загрузить"), menu));
-    actionSave =  QSharedPointer<QAction>( new QAction(QString("Сохранить"), menu));
-    actionClean =  QSharedPointer<QAction>(new QAction(QString("Очистить"), menu));
+    _actionLoad = QSharedPointer<QAction>(new QAction(QString("Загрузить"), _menu));
 
-    menu->addAction(actionLoad.data());
-    menu->addAction(actionSave.data());
-    menu->addAction(actionClean.data());
+    _actionSave =  QSharedPointer<QAction>( new QAction(QString("Сохранить"), _menu));
+
+    _actionClean =  QSharedPointer<QAction>(new QAction(QString("Очистить"), _menu));
+
+    _menu->addAction(_actionLoad.data());
+
+    _menu->addAction(_actionSave.data());
+
+    _menu->addAction(_actionClean.data());
 
     //коннекты Action'ов для индексации нажатий и последующих эмитов других функций
-    QObject::connect(actionLoad.data(), &QAction::triggered, this, &PanelWidget::slotOpenExplorerToLoad);
-    QObject::connect(actionSave.data(), &QAction::triggered, this, &PanelWidget::slotOpenExplorerToSave);
-    QObject::connect(actionClean.data(), &QAction::triggered, this, &PanelWidget::slotCleanTextEdit);
+    QObject::connect(_actionLoad.data(), &QAction::triggered, this, &PanelWidget::slotOpenExplorerToLoad);
 
-    btnFile->setMenu(menu);
+    QObject::connect(_actionSave.data(), &QAction::triggered, this, &PanelWidget::slotOpenExplorerToSave);
+
+    QObject::connect(_actionClean.data(), &QAction::triggered, this, &PanelWidget::slotCleanTextEdit);
+
+    _btnFile->setMenu(_menu);
 
     //кнопки изменяющие стиль
-    btnSetFattFormat = new CustomButton("Жирный", this);
-    btnSetCursive = new CustomButton("Курсив", this);
+    _btnSetFattFormat = new CustomButton("Fatt", this);
 
-    btnOpenTable = new QPushButton("Live-Result", this);
+    _btnSetCursive = new CustomButton("Cursive", this);
+
+    _btnOpenTable = new QPushButton("Live-Result", this);
 
     //коннекты для смены цвета - индикация состояния
-    QObject::connect(btnSetFattFormat, &QPushButton::clicked, btnSetFattFormat, &CustomButton::changeIsActive);
-    QObject::connect(btnSetCursive, &QPushButton::clicked, btnSetCursive, &CustomButton::changeIsActive);
+    QObject::connect(_btnSetFattFormat, &QPushButton::clicked, _btnSetFattFormat, &CustomButton::changeIsActive);
 
-    layout = new QHBoxLayout(this);
+    QObject::connect(_btnSetCursive, &QPushButton::clicked, _btnSetCursive, &CustomButton::changeIsActive);
 
-    layout->addWidget(btnFile);
-    layout->addWidget(btnSetFattFormat);
-    layout->addWidget(btnSetCursive);
-    layout->addWidget(btnOpenTable);
+    _layout = new QHBoxLayout(this);
+
+    _layout->addWidget(_btnFile);
+    _layout->addWidget(_btnSetFattFormat);
+    _layout->addWidget(_btnSetCursive);
+    _layout->addWidget(_btnOpenTable);
 
     // Выравнивание влево и вверх
-    layout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    _layout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
     // Фиксируем минимальную высоту панели
-    setMinimumHeight(btnFile->sizeHint().height());
+    setMinimumHeight(_btnFile->sizeHint().height());
 
     // Привязываем размер панели к содержимому
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+}
+
+QPushButton *PanelWidget::getBtnFile() const{
+    return _btnFile;
+}
+
+CustomButton *PanelWidget::getBtnSetFattFormat() const{
+    return _btnSetFattFormat;
+}
+
+CustomButton *PanelWidget::getBtnSetCursiveFormat() const{
+    return _btnSetCursive;
+}
+
+void PanelWidget::setTextForSaving(QString text){
+    this->_m_currentText = text;
+}
+
+QPushButton *PanelWidget::getBtnOpenTable() const{
+    return _btnOpenTable;
 }
 
 void PanelWidget::slotOpenExplorerToSave()
 {
-    //мем для тестаааааааа
     emit signalToGetTextFromTextEdit();
-    //чтобы заполнить эту штуковину, нужно предпринять emit
+
     QString m_currentFile;
     // Открываем диалог сохранения файла
     QString filePath = QFileDialog::getSaveFileName(
@@ -73,7 +101,7 @@ void PanelWidget::slotOpenExplorerToSave()
         // Пытаемся открыть файл для записи
         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream out(&file);
-            out << m_currentText;  // Записываем текст в файл
+            out << _m_currentText;  // Записываем текст в файл
             file.close();
 
             m_currentFile = filePath; // Сохраняем текущий путь
@@ -89,7 +117,8 @@ void PanelWidget::slotOpenExplorerToSave()
 
 void PanelWidget::slotCleanTextEdit()
 {
-    this->m_currentText.clear();
+    this->_m_currentText.clear();
+
     emit signalCleanTextEdit();
 }
 
@@ -102,21 +131,22 @@ void PanelWidget::slotOpenExplorerToLoad()
                 "Текстовые файлы (*.txt);");
 
     if (!filePath.isEmpty()) {
-        qDebug() << "Выбран файл:" << filePath;
 
         QFile file(filePath);
+
         if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+
             // Вариант 1: Чтение всего файла сразу
             QString fileContent = QString::fromUtf8(file.readAll());
+
             file.close();
 
-            qDebug() << "Содержимое файла:" << fileContent;
             emit signalTextLoadToTextEdit(fileContent); // Сигнал с содержимым файла
 
             // Вариант 2: Построчное чтение (для больших файлов)
             /*
                 QTextStream in(&file);
-                in.setCodec("UTF-8"); // Установка кодировки
+                in.setCodec("UTF-8");
                 QStringList lines;
                 while (!in.atEnd()) {
                     lines << in.readLine();
@@ -125,7 +155,6 @@ void PanelWidget::slotOpenExplorerToLoad()
                 QString fileContent = lines.join("\n");
                 */
         } else {
-            qDebug() << "Ошибка открытия файла:" << file.errorString();
             QMessageBox::critical(this, "Ошибка",
                                   "Не удалось открыть файл:\n" + file.errorString());
         }

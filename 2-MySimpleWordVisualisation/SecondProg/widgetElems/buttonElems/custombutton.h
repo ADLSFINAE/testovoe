@@ -10,6 +10,7 @@ class CustomButton : public QPushButton
     Q_OBJECT
 public:
     CustomButton() = default;
+
     CustomButton(QString text, QWidget* parent);
 
     bool getIsActive() const{return _isActive;};
@@ -19,10 +20,12 @@ signals:
 
 public slots:
     void changeColor();
+
     void changeIsActive();
 
 private:
     QBrush _brush;
+
     bool _isActive;
 };
 
