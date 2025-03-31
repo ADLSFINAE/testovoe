@@ -14,7 +14,6 @@ SOURCES += \
     generaladapter.cpp \
     guiElems/customscene.cpp \
     guiElems/customview.cpp \
-    logicElems/sieveeratosthenes.cpp \
     main.cpp \
     widgetElems/answertextedit.cpp \
     widgetElems/controllerwidget.cpp \
@@ -27,7 +26,6 @@ HEADERS += \
 	generaladapter.h \
 	guiElems/customscene.h \
 	guiElems/customview.h \
-	logicElems/sieveeratosthenes.h \
 	paramsNdefines.h \
 	widgetElems/answertextedit.h \
 	widgetElems/controllerwidget.h \

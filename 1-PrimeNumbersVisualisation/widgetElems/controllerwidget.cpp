@@ -4,12 +4,12 @@ ControllerWidget::ControllerWidget(QWidget *parent)
 {
     this->setParent(parent);
 
-    btnUp = new QPushButton("Up", this);
+    _btnUp = new QPushButton("Up", this);
 
-    btnReturn = new QPushButton("Return", this);
+    _btnReturn = new QPushButton("Return", this);
 
-    btnOnTimer = new QPushButton("On Timer", this);
-    btnOnTimer->setStyleSheet(
+    _btnOnTimer = new QPushButton("On Timer", this);
+    _btnOnTimer->setStyleSheet(
         "QPushButton {"
         "   background-color: #F44336;"
         "   color: white;"
@@ -18,50 +18,49 @@ ControllerWidget::ControllerWidget(QWidget *parent)
         "}"
     );
 
-    layout = new QVBoxLayout(this);
+    _layout = new QVBoxLayout(this);
 
-    layout->addWidget(btnUp);
+    _layout->addWidget(_btnUp);
 
-    layout->addWidget(btnReturn);
+    _layout->addWidget(_btnReturn);
 
-    layout->addWidget(btnOnTimer);
+    _layout->addWidget(_btnOnTimer);
 
-    layout->setSpacing(1);
+    _layout->setSpacing(1);
 
-    layout->setContentsMargins(20, 20, 20, 20);
+    _layout->setContentsMargins(20, 20, 20, 20);
 
     //коннект для изменения цвета кнопки
-    QObject::connect(btnOnTimer, &QPushButton::clicked, this, &ControllerWidget::slotChangeColorBtnOnTimer);
+    QObject::connect(_btnOnTimer, &QPushButton::clicked, this, &ControllerWidget::slotChangeColorBtnOnTimer);
 }
 
 QPushButton *ControllerWidget::getBtnUp() const{
-    return btnUp;
+    return _btnUp;
 }
 
 QPushButton *ControllerWidget::getBtnReturn() const{
-    return btnReturn;
+    return _btnReturn;
 }
 
 QPushButton *ControllerWidget::getBtnOnTimer() const
 {
-    return btnOnTimer;
+    return _btnOnTimer;
 }
 
 void ControllerWidget::slotChangeColorBtnOnTimer()
 {
-    if(isTimerOn){
-        btnOnTimer->setStyleSheet(
+    if(_isTimerOn){
+        _btnOnTimer->setStyleSheet(
             "QPushButton {"
-            "   background-color: #F44336;"  // Красный фон (как в Material Design)
-            "   color: white;"               // Белый текст
-            "   border-radius: 5px;"         // Скругленные углы
-            "   padding: 5px 10px;"          // Отступы внутри
+            "   background-color: #F44336;"
+            "   color: white;"
+            "   border-radius: 5px;"
+            "   padding: 5px 10px;"
             "}"
         );
-        isTimerOn = !isTimerOn;
     }
     else{
-        btnOnTimer->setStyleSheet(
+        _btnOnTimer->setStyleSheet(
             "QPushButton {"
             "   background-color: #4CAF50;"
             "   color: white;"
@@ -69,8 +68,8 @@ void ControllerWidget::slotChangeColorBtnOnTimer()
             "   padding: 5px 10px;"
             "}"
         );
-        isTimerOn = !isTimerOn;
     }
+    _isTimerOn = !_isTimerOn;
 }
 
 

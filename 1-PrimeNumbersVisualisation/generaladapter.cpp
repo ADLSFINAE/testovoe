@@ -2,45 +2,41 @@
 
 GeneralAdapter::GeneralAdapter()
 {
-    scene = new CustomScene(GlobVal::sceneRect, nullptr);
+    _scene = new CustomScene(GlobVal::sceneRect, nullptr);
 
-    view = new CustomView(GlobVal::viewSize, scene, nullptr);
+    _view = new CustomView(GlobVal::viewSize, _scene, nullptr);
 
-    view->show();
+    _view->show();
 
-    boardSolver = new CustomBoard(GlobVal::boardSolver, 200, nullptr);
+    _boardSolver = new CustomBoard(GlobVal::boardSolver, 200, nullptr);
 
-    scene->addItem(boardSolver);
+    _scene->addItem(_boardSolver);
 
-    generalWidget = new GeneralWidget(nullptr);
+    _generalWidget = new GeneralWidget(nullptr);
 
-    scene->addWidget(generalWidget);
+    _scene->addWidget(_generalWidget);
 
-    generalWidget->show();
+    _answerTextEdit = new AnswerTextEdit(nullptr);
 
-    answerTextEdit = new AnswerTextEdit(nullptr);
-
-    scene->addWidget(answerTextEdit);
-
-    answerTextEdit->show();
+    _scene->addWidget(_answerTextEdit);
 
     //коннект для инициализации доски значениями и ее отчистки от старый значений
-    QObject::connect(generalWidget->getInputWidget(), &InputWidget::numberSubmitted,
-                     boardSolver, &CustomBoard::initVecBlocks);
+    QObject::connect(_generalWidget->getInputWidget(), &InputWidget::numberSubmitted,
+                     _boardSolver, &CustomBoard::initVecBlocks);
 
     //коннект для передачи текста
-    QObject::connect(boardSolver, &CustomBoard::signalToSendPrimeNumber,
-                     answerTextEdit, &AnswerTextEdit::appendOutput);
+    QObject::connect(_boardSolver, &CustomBoard::signalToSendPrimeNumber,
+                     _answerTextEdit, &AnswerTextEdit::appendOutput);
 
     //коннект для перемещения доски
-    QObject::connect(generalWidget->getControllerWidget()->getBtnUp(), &QPushButton::clicked,
-                     boardSolver, &CustomBoard::changePosUp);
+    QObject::connect(_generalWidget->getControllerWidget()->getBtnUp(), &QPushButton::clicked,
+                     _boardSolver, &CustomBoard::changePosUp);
 
     //коннект для возвращения позиции доски
-    QObject::connect(generalWidget->getControllerWidget()->getBtnReturn(), &QPushButton::clicked,
-                     boardSolver, &CustomBoard::changePosReturn);
+    QObject::connect(_generalWidget->getControllerWidget()->getBtnReturn(), &QPushButton::clicked,
+                     _boardSolver, &CustomBoard::changePosReturn);
 
     //коннект для выбора режима с таймером и без
-    QObject::connect(generalWidget->getControllerWidget()->getBtnOnTimer(), &QPushButton::clicked,
-                     boardSolver, &CustomBoard::changeIsTimerOn);
+    QObject::connect(_generalWidget->getControllerWidget()->getBtnOnTimer(), &QPushButton::clicked,
+                     _boardSolver, &CustomBoard::changeIsTimerOn);
 }

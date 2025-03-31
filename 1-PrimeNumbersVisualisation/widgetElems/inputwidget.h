@@ -23,13 +23,13 @@ private slots:
     void processInput();
 
 private:
-    QPushButton* btnInputNumber{nullptr};
+    QPushButton* _btnInputNumber{nullptr};
 
-    QLineEdit* lineEdit{nullptr};
+    QLineEdit* _lineEdit{nullptr};
 
-    QIntValidator* validator{nullptr};
+    QIntValidator* _validator{nullptr};
 
-    QVBoxLayout* layout{nullptr};
+    QVBoxLayout* _layout{nullptr};
 
 };
 

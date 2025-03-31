@@ -4,25 +4,26 @@ AnswerTextEdit::AnswerTextEdit(QWidget *parent) : QWidget(parent)
 {
     this->setGeometry(GlobVal::AnswerTextEditGeometry);
 
-    outputField = new QTextEdit(this);
+    _outputField = new QTextEdit(this);
 
-    outputField->setReadOnly(true);
+    _outputField->setReadOnly(true);
 
-    outputField->setWordWrapMode(QTextOption::WordWrap);
+    _outputField->setWordWrapMode(QTextOption::WordWrap);
 
-    outputField->setStyleSheet("QTextEdit { background: #f8f8f8; }");
+    _outputField->setStyleSheet("QTextEdit { background: #f8f8f8; }");
 
-    clearBtn = new QPushButton("Clear Output", this);
+    _clearBtn = new QPushButton("Clear Output", this);
 
-    layout = new QVBoxLayout(this);
+    _layout = new QVBoxLayout(this);
 
-    layout->addWidget(outputField);
+    _layout->addWidget(_outputField);
 
-    layout->addWidget(clearBtn);
+    _layout->addWidget(_clearBtn);
 
-    connect(clearBtn, &QPushButton::clicked, outputField, &QTextEdit::clear);
+    //коннект для очистки поля ввода, после нажатия submit'а
+    QObject::connect(_clearBtn, &QPushButton::clicked, _outputField, &QTextEdit::clear);
 }
 
 void AnswerTextEdit::appendOutput(const QString &text) {
-    outputField->append(text);  // Добавляет текст с новой строки
+    _outputField->append(text);
 }

@@ -23,15 +23,15 @@ private slots:
     void slotChangeColorBtnOnTimer();
 
 private:
-    QPushButton* btnUp{nullptr};
+    QPushButton* _btnUp{nullptr};
 
-    QPushButton* btnReturn{nullptr};
+    QPushButton* _btnReturn{nullptr};
 
-    QPushButton* btnOnTimer{nullptr};
+    QPushButton* _btnOnTimer{nullptr};
 
-    bool isTimerOn = false;
+    bool _isTimerOn = false;
 
-    QVBoxLayout* layout{nullptr};
+    QVBoxLayout* _layout{nullptr};
 
 };
 

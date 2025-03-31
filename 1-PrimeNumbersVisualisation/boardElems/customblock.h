@@ -31,15 +31,16 @@ public:
 
     bool getPrimeStatus();
 private:
-    int x, y;
+    int _x, _y;
 
-    QBrush color;
+    QBrush _color;
 
-    int number;
+    int _number;
 
-    bool numberIsPrime = true;
+    bool _numberIsPrime = true;
 
-    QGraphicsTextItem* textItem{nullptr};
+    QGraphicsTextItem* _textItem{nullptr};
+
 };
 
 #endif // CUSTOMBLOCK_H

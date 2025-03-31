@@ -1,7 +1,7 @@
 #include "customblock.h"
 
 CustomBlock::CustomBlock(int x, int y, int number, QGraphicsRectItem *parentItem)
-    :x(x),y(y),number(number)
+    :_x(x),_y(y),_number(number)
 {
     this->setParentItem(parentItem);
 
@@ -11,17 +11,17 @@ CustomBlock::CustomBlock(int x, int y, int number, QGraphicsRectItem *parentItem
 
     this->setBrush(Qt::white);
 
-    textItem = new QGraphicsTextItem(this);
+    _textItem = new QGraphicsTextItem(this);
 
-    textItem->setPos(GlobVal::blockRect.width() / 4, GlobVal::blockRect.height() / 4);
+    _textItem->setPos(GlobVal::blockRect.width() / 4, GlobVal::blockRect.height() / 4);
 
-    textItem->setPlainText(QString::number(number));
+    _textItem->setPlainText(QString::number(number));
 
 }
 
 void CustomBlock::changeColor(QBrush color)
 {
-    this->color = color;
+    this->_color = color;
 
     this->setBrush(color);
 
@@ -30,20 +30,20 @@ void CustomBlock::changeColor(QBrush color)
 
 QPointF CustomBlock::getPos() const
 {
-    return QPointF(x,y);
+    return QPointF(_x,_y);
 }
 
 int CustomBlock::getNumber() const
 {
-    return number;
+    return _number;
 }
 
 void CustomBlock::setPrimeStatus(bool status)
 {
-    this->numberIsPrime = status;
+    this->_numberIsPrime = status;
 }
 
 bool CustomBlock::getPrimeStatus()
 {
-    return numberIsPrime;
+    return _numberIsPrime;
 }

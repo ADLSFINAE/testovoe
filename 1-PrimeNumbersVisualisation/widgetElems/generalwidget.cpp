@@ -5,22 +5,30 @@ GeneralWidget::GeneralWidget(QWidget *parent)
 {
     this->setGeometry(GlobVal::generalWidgetGeometry);
 
-    controllerWidget = new ControllerWidget(this);
+    _controllerWidget = new ControllerWidget(this);
 
-    inputWidget = new InputWidget(this);
+    _inputWidget = new InputWidget(this);
 
-    layout = new QHBoxLayout(this);
+    _layout = new QHBoxLayout(this);
 
-    layout->addWidget(inputWidget);
+    _layout->addWidget(_inputWidget);
 
-    layout->addWidget(controllerWidget);
+    _layout->addWidget(_controllerWidget);
 
-    layout->setSpacing(20);
+    _layout->setSpacing(20);
 
-    layout->setContentsMargins(15, 15, 15, 15);
+    _layout->setContentsMargins(15, 15, 15, 15);
 
-    layout->setStretch(0, 1);
+    _layout->setStretch(0, 1);
 
-    layout->setStretch(1, 2);
+    _layout->setStretch(1, 2);
 
+}
+
+ControllerWidget *GeneralWidget::getControllerWidget() const{
+    return _controllerWidget;
+}
+
+InputWidget *GeneralWidget::getInputWidget() const{
+    return _inputWidget;
 }

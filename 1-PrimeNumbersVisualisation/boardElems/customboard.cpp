@@ -9,7 +9,7 @@ CustomBoard::CustomBoard(QRectF rectBoard, int N, QGraphicsRectItem *parent)
 
 QVector<CustomBlock *> CustomBoard::getVecBlocks() const
 {
-    return vecBlocks;
+    return _vecBlocks;
 }
 
 void CustomBoard::initVecBlocks(int N)
@@ -17,16 +17,16 @@ void CustomBoard::initVecBlocks(int N)
     this->setPos(0, 0);
 
     //очистка доски и вектора для новых данных
-    if(vecBlocks.size() > 0){
-        for(auto& elem : vecBlocks)
+    if(_vecBlocks.size() > 0){
+        for(auto& elem : _vecBlocks)
             this->scene()->removeItem(elem);
 
-        vecBlocks.clear();
+        _vecBlocks.clear();
     }
 
     //заполнение доски
     N++;
-    vecBlocks.resize(N);
+    _vecBlocks.resize(N);
     int iterX = 0;
     int iterY = 0;
     for(int i = 0; i < N; i++){
@@ -36,7 +36,7 @@ void CustomBoard::initVecBlocks(int N)
             iterX = 0;
             iterY++;
         }
-        vecBlocks[i] = block;
+        _vecBlocks[i] = block;
     }
 
     // Создаем массив для отметки простых чисел
@@ -44,14 +44,14 @@ void CustomBoard::initVecBlocks(int N)
     isPrime[0] = isPrime[1] = false;
 
     //исключительная ситуация 0 - простое число
-    if(vecBlocks[0] != nullptr){
-        vecBlocks[0]->changeColor(Qt::blue);
-        vecBlocks[0]->setPrimeStatus(false);
+    if(_vecBlocks[0] != nullptr){
+        _vecBlocks[0]->changeColor(Qt::blue);
+        _vecBlocks[0]->setPrimeStatus(false);
     }
     //исключительная ситуация
-    if(vecBlocks[1] != nullptr){
-        vecBlocks[1]->changeColor(Qt::blue);
-        vecBlocks[1]->setPrimeStatus(false);
+    if(_vecBlocks[1] != nullptr){
+        _vecBlocks[1]->changeColor(Qt::blue);
+        _vecBlocks[1]->setPrimeStatus(false);
     }
 
     // Алгоритм Решета Эратосфена: https://ru.wikipedia.org/wiki/Решето_Эратосфена
@@ -59,9 +59,9 @@ void CustomBoard::initVecBlocks(int N)
         if (isPrime[p]) {
             // Вычеркиваем все кратные p, начиная с p^2
             for (int i = p * p; i <= N; i += p) {
-                for(auto& elem : vecBlocks){
+                for(auto& elem : _vecBlocks){
                     if(elem->getNumber() == i){
-                        if(isTimerOn){
+                        if(_isTimerOn){
                             TimerForAnimation(25);
                         }
                         elem->changeColor(Qt::red);
@@ -74,9 +74,9 @@ void CustomBoard::initVecBlocks(int N)
         }
     }
 
-    for(auto& elem : vecBlocks){
+    for(auto& elem : _vecBlocks){
         if(elem->getPrimeStatus()){
-            if(isTimerOn){
+            if(_isTimerOn){
                 TimerForAnimation(50);
             }
             elem->changeColor(Qt::green);
@@ -91,9 +91,6 @@ void CustomBoard::initVecBlocks(int N)
             primes.push_back(i);
         }
     }
-
-
-
 
 }
 
@@ -116,5 +113,5 @@ void CustomBoard::changePosReturn()
 
 void CustomBoard::changeIsTimerOn()
 {
-    isTimerOn = !isTimerOn;
+    _isTimerOn = !_isTimerOn;
 }

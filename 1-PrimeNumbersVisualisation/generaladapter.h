@@ -19,15 +19,15 @@ public:
     GeneralAdapter();
 
 private:
-    CustomScene* scene{nullptr};
+    CustomScene* _scene{nullptr};
 
-    CustomView* view{nullptr};
+    CustomView* _view{nullptr};
 
-    CustomBoard* boardSolver{nullptr};
+    CustomBoard* _boardSolver{nullptr};
 
-    GeneralWidget* generalWidget{nullptr};
+    GeneralWidget* _generalWidget{nullptr};
 
-    AnswerTextEdit* answerTextEdit{nullptr};
+    AnswerTextEdit* _answerTextEdit{nullptr};
 
 };
 

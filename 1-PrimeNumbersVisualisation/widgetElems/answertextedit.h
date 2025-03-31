@@ -20,11 +20,11 @@ public slots:
     void appendOutput(const QString& text);
 
 private:
-    QTextEdit* outputField{nullptr};
+    QTextEdit* _outputField{nullptr};
 
-    QPushButton* clearBtn{nullptr};
+    QPushButton* _clearBtn{nullptr};
 
-    QVBoxLayout* layout{nullptr};
+    QVBoxLayout* _layout{nullptr};
 };
 
 #endif // ANSWERTEXTEDIT_H

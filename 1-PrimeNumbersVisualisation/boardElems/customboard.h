@@ -11,7 +11,6 @@
 #include "boardElems/customblock.h"
 #include "paramsNdefines.h"
 #include "guiElems/customscene.h"
-#include "logicElems/sieveeratosthenes.h"
 
 class CustomBoard : public QObject, public QGraphicsRectItem
 {
@@ -48,9 +47,9 @@ public slots:
     void changeIsTimerOn();
 
 private:
-    QVector<CustomBlock*> vecBlocks;
+    QVector<CustomBlock*> _vecBlocks;
 
-    bool isTimerOn = false;
+    bool _isTimerOn = false;
 };
 
 #endif // CUSTOMBOARD_H

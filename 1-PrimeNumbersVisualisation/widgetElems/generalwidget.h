@@ -17,16 +17,16 @@ public:
 
     GeneralWidget(QWidget* parent = nullptr);
 
-    ControllerWidget* getControllerWidget() const{return controllerWidget;};
+    ControllerWidget* getControllerWidget() const;
 
-    InputWidget* getInputWidget() const{return inputWidget;};
+    InputWidget* getInputWidget() const;
 
 private:
-    QHBoxLayout* layout{nullptr};
+    QHBoxLayout* _layout{nullptr};
 
-    ControllerWidget* controllerWidget{nullptr};
+    ControllerWidget* _controllerWidget{nullptr};
 
-    InputWidget* inputWidget{nullptr};
+    InputWidget* _inputWidget{nullptr};
 
 };
 
