@@ -6,6 +6,7 @@
 
 #include "logicElems/list.h"
 
+//Реализация функций односвязного списка
 class ListAlgorithm : public QObject
 {
     Q_OBJECT
@@ -16,13 +17,15 @@ public:
 
     void cleanList();
 
-    List* getHead() const{return head;}
+    List* getHead() const;
 signals:
     void signalToRedrawItems(List* head);
+
 public slots:
     void deleteEveryFifth(List* head);
+
 private:
-    List* head;
+    List* _head;
 };
 
 #endif // LISTALGORITHM_H

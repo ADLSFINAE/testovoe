@@ -15,18 +15,22 @@ public:
     CustomRectangle(QRectF rectParams, int number, bool haveArrow, QGraphicsRectItem* parent);
 
     void setHaveArrow(bool haveArrow){this->_haveArrow = haveArrow;}
+
     bool getHaveArrow() const{return _haveArrow;}
 
 private:
     QGraphicsTextItem* _textItem{nullptr};
 
     QRectF _rectParams;
+
     int _number;
 
     QGraphicsPixmapItem* _pixmapItem{nullptr};
 
     QPixmap _pixmapArrow;
+
     bool _haveArrow;
+
 };
 
 #endif // CUSTOMRECTANGLE_H

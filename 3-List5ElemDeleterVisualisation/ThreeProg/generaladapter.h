@@ -2,12 +2,15 @@
 #define GENERALADAPTER_H
 
 #include <QObject>
+#include <QMessageBox>
 
 #include "guiElems/customscene.h"
 #include "guiElems/customview.h"
 #include "guiElems/customRectangle/itemscontroller.h"
 
 #include "logicElems/listalgorithm.h"
+
+#include "widgetWithInputNumber/inputwidget.h"
 
 class GeneralAdapter : public QObject
 {
@@ -18,15 +21,20 @@ public:
 public slots:
     void getListHead(List* head);
 
+    void setNumberOfListElems();
+
 private:
-    CustomScene* scene{nullptr};
-    CustomView* view{nullptr};
+    CustomScene* _scene{nullptr};
 
-    ItemsController* itemsController{nullptr};
+    CustomView* _view{nullptr};
 
-    ListAlgorithm* algo{nullptr};
+    ItemsController* _itemsController{nullptr};
 
-    List* head{nullptr};
+    ListAlgorithm* _algo{nullptr};
+
+    List* _head{nullptr};
+
+    InputWidget* _inputWidget{nullptr};
 };
 
 #endif // GENERALADAPTER_H

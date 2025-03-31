@@ -20,8 +20,8 @@ CustomRectangle::CustomRectangle(QRectF rectParams, int number, bool haveArrow, 
                         Qt::SmoothTransformation
                     ));
         _pixmapItem->setPos(
-                    this->pos().x() + _rectParams.width(), // справа от прямоугольника
-                    this->pos().y() + (_rectParams.width()/3) // по центру по вертикали
+                    this->pos().x() + _rectParams.width(),
+                    this->pos().y() + (_rectParams.width()/3)
                     );
     }
 

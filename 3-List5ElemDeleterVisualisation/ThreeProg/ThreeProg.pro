@@ -16,7 +16,8 @@ SOURCES += \
     guiElems/customview.cpp \
     logicElems/list.cpp \
     logicElems/listalgorithm.cpp \
-    main.cpp
+    main.cpp \
+    widgetWithInputNumber/inputwidget.cpp
 
 HEADERS += \
 	customscene.h \
@@ -27,7 +28,8 @@ HEADERS += \
 	guiElems/customscene.h \
 	guiElems/customview.h \
 	logicElems/list.h \
-	logicElems/listalgorithm.h
+	logicElems/listalgorithm.h \
+	widgetWithInputNumber/inputwidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

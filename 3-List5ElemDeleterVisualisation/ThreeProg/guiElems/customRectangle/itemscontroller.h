@@ -14,6 +14,7 @@ class ItemsController : public QObject, public QGraphicsRectItem
     Q_OBJECT
 public:
     ItemsController() = default;
+
     ItemsController(List* head, QGraphicsRectItem* parent = nullptr);
 
 public slots:
@@ -21,14 +22,20 @@ public slots:
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
     void wheelEvent(QGraphicsSceneWheelEvent *event) override;
+
 signals:
     void signalToDelete5(List* head);
+
 public slots:
     void setListHead(List* head);
+
 private:
-    QVector<CustomRectangle*> vecItems;
-    List* head{nullptr};
+    QVector<CustomRectangle*> _vecItems;
+
+    List* _head{nullptr};
+
 };
 
 #endif // ITEMSCONTROLLER_H
