@@ -10,20 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     generaladapter.cpp \
-    guiElems/TreeVisualisation/treevisualcontroller.cpp \
-    guiElems/customEllipse/customellipse.cpp \
-    guiElems/customscene.cpp \
-    guiElems/customview.cpp \
-    logicElems/treealgorithm.cpp \
-    main.cpp
+    main.cpp \
+    resultWidget/resultwidget.cpp \
+    treeLogic/treeNode/treenode.cpp \
+    treeLogic/treeanalysator.cpp \
+    treeVisual/treebuilder.cpp \
+    treeVisual/treevisualiser.cpp
 
 HEADERS += \
 	generaladapter.h \
-	guiElems/TreeVisualisation/treevisualcontroller.h \
-	guiElems/customEllipse/customellipse.h \
-	guiElems/customscene.h \
-	guiElems/customview.h \
-	logicElems/treealgorithm.h
+	resultWidget/resultwidget.h \
+	treeLogic/treeNode/treenode.h \
+	treeLogic/treeanalysator.h \
+	treeVisual/treebuilder.h \
+	treeVisual/treevisualiser.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
