@@ -1,0 +1,12 @@
+release/generaladapter.o
+release/main.o
+release/resultwidget.o
+release/treenode.o
+release/treeanalysator.o
+release/treebuilder.o
+release/treevisualiser.o
+release/moc_generaladapter.o
+release/moc_resultwidget.o
+release/moc_treeanalysator.o
+release/moc_treebuilder.o
+release/moc_treevisualiser.o

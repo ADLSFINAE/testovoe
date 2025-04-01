@@ -1,0 +1,12 @@
+debug/generaladapter.o
+debug/main.o
+debug/resultwidget.o
+debug/treenode.o
+debug/treeanalysator.o
+debug/treebuilder.o
+debug/treevisualiser.o
+debug/moc_generaladapter.o
+debug/moc_resultwidget.o
+debug/moc_treeanalysator.o
+debug/moc_treebuilder.o
+debug/moc_treevisualiser.o
